@@ -10,7 +10,7 @@
         "source_commit": "33f85f2656a561534f875ee5e690a4233d95aec6",
         "submission": "SUB-S4-G2-001"
       },
-      "review_text": "Synthetic public G2 requirements and acceptance fixtures fixed for Human review; no prototype, implementation, deployment, real business use, or future 30-to-70 threshold approval."
+      "review_text": "Synthetic public G2 requirements and acceptance fixtures fixed for Human review; the legacy 12-field delegation.json is a public proposal description, while Control registers the exact three-field submissions/SUB-S4-G2-001/control-delegation.json source; no prototype, implementation, deployment, real business use, or future 30-to-70 threshold approval."
     },
     "producer_ref": "WORK",
     "task_ref": "G2-PRODUCT",
