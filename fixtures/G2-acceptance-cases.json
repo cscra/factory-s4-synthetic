@@ -1,0 +1,153 @@
+{
+  "schema": "factory-s4-g2-acceptance-cases/v0.1",
+  "status": "PROPOSED_FIXTURE_ORACLE_NOT_EXECUTED",
+  "current_criterion_version": "G2-30PCT-R1",
+  "cases": [
+    {
+      "id": "G2-AC-01",
+      "kind": "VALID_PRIMARY_SAMPLE",
+      "dataset_id": "g2-sample-2026-01-02",
+      "input_file": "fixtures/G2-valid.csv",
+      "expected": {
+        "status": "ACCEPT",
+        "monthly_totals_kwh": {"2026-01": "300.000", "2026-02": "370.000"},
+        "anomalies": ["2026-02/A"],
+        "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
+      }
+    },
+    {
+      "id": "G2-AC-02",
+      "kind": "INVALID_MONTH",
+      "dataset_id": "g2-invalid-month",
+      "input_file": "fixtures/G2-invalid-month.csv",
+      "expected": {"status": "REJECT", "error": "INVALID_MONTH", "state_change": "NONE"}
+    },
+    {
+      "id": "G2-AC-03",
+      "kind": "NEGATIVE_KWH",
+      "dataset_id": "g2-negative-atomic",
+      "input_file": "fixtures/G2-negative.csv",
+      "expected": {"status": "REJECT", "error": "NEGATIVE_KWH", "state_change": "NONE"}
+    },
+    {
+      "id": "G2-AC-04",
+      "kind": "DUPLICATE_ROW_KEY",
+      "dataset_id": "g2-duplicate-atomic",
+      "input_file": "fixtures/G2-duplicate.csv",
+      "expected": {"status": "REJECT", "error": "DUPLICATE_MONTH_BUILDING", "state_change": "NONE"}
+    },
+    {
+      "id": "G2-AC-05",
+      "kind": "EXACT_REPLAY",
+      "dataset_id": "g2-sample-2026-01-02",
+      "input_file": "fixtures/G2-replay.json#exact_replay",
+      "expected": {"status": "REJECT", "error": "DUPLICATE_DATASET_REPLAY", "state_change": "NONE"}
+    },
+    {
+      "id": "G2-AC-06",
+      "kind": "CHANGED_REPLAY",
+      "dataset_id": "g2-sample-2026-01-02",
+      "input_file": "fixtures/G2-replay.json#changed_replay",
+      "expected": {"status": "REJECT", "error": "DATASET_ID_REUSE_CONFLICT", "state_change": "NONE"}
+    },
+    {
+      "id": "G2-AC-07",
+      "kind": "NO_PRIOR_MONTH",
+      "dataset_id": "g2-no-prior",
+      "rows": [{"month": "2026-02", "building": "C", "kwh": "10"}],
+      "expected": {
+        "status": "ACCEPT",
+        "comparison": {"2026-02/C": {"comparison_status": "NO_PRIOR_MONTH", "percent_change": null, "anomaly": false}},
+        "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
+      }
+    },
+    {
+      "id": "G2-AC-08",
+      "kind": "ZERO_BASELINE",
+      "dataset_id": "g2-zero-baseline",
+      "rows": [
+        {"month": "2026-01", "building": "D", "kwh": "0"},
+        {"month": "2026-02", "building": "D", "kwh": "5"}
+      ],
+      "expected": {
+        "status": "ACCEPT",
+        "comparison": {"2026-02/D": {"comparison_status": "ZERO_BASELINE", "percent_change": null, "anomaly": false}},
+        "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
+      }
+    },
+    {
+      "id": "G2-AC-09",
+      "kind": "EXACT_DECIMAL",
+      "dataset_id": "g2-decimal-exact",
+      "rows": [
+        {"month": "2026-01", "building": "E", "kwh": "0.1"},
+        {"month": "2026-01", "building": "F", "kwh": "0.2"},
+        {"month": "2026-02", "building": "E", "kwh": "0.3"},
+        {"month": "2026-02", "building": "F", "kwh": "0.2"}
+      ],
+      "expected": {
+        "status": "ACCEPT",
+        "monthly_totals_kwh": {"2026-01": "0.300", "2026-02": "0.500"},
+        "comparison": {
+          "2026-02/E": {"percent_change": "200.000", "anomaly": true},
+          "2026-02/F": {"percent_change": "0.000", "anomaly": false}
+        },
+        "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
+      }
+    },
+    {
+      "id": "G2-AC-10",
+      "kind": "EXACT_THRESHOLD",
+      "dataset_id": "g2-threshold-exact",
+      "rows": [
+        {"month": "2026-01", "building": "G", "kwh": "100"},
+        {"month": "2026-02", "building": "G", "kwh": "130"}
+      ],
+      "expected": {"status": "ACCEPT", "comparison": {"2026-02/G": {"percent_change": "30.000", "anomaly": false}}}
+    },
+    {
+      "id": "G2-AC-11",
+      "kind": "ABOVE_THRESHOLD",
+      "dataset_id": "g2-threshold-above",
+      "rows": [
+        {"month": "2026-01", "building": "H", "kwh": "100"},
+        {"month": "2026-02", "building": "H", "kwh": "130.001"}
+      ],
+      "expected": {"status": "ACCEPT", "comparison": {"2026-02/H": {"percent_change": "30.001", "anomaly": true}}}
+    },
+    {
+      "id": "G2-AC-12",
+      "kind": "STRICT_NUMBER_AND_ROW_SHAPE",
+      "dataset_id": "g2-invalid-number-shape",
+      "rows": [{"month": "2026-01", "building": "I", "kwh": "1e2"}],
+      "expected": {"status": "REJECT", "error": "INVALID_KWH_FORMAT", "state_change": "NONE"}
+    },
+    {
+      "id": "G2-AC-13",
+      "kind": "ATOMIC_MIXED_BATCH",
+      "dataset_id": "g2-mixed-invalid",
+      "rows": [
+        {"month": "2026-01", "building": "J", "kwh": "10"},
+        {"month": "2026-01", "building": "K", "kwh": "-0.001"}
+      ],
+      "expected": {"status": "REJECT", "error": "NEGATIVE_KWH", "state_change": "NONE", "valid_prefix_must_not_persist": true}
+    },
+    {
+      "id": "G2-AC-14",
+      "kind": "REPLAY_IDENTITY",
+      "dataset_id": "g2-sample-2026-01-02",
+      "input_file": "fixtures/G2-replay.json",
+      "expected": {"status": "REJECT", "errors": ["DUPLICATE_DATASET_REPLAY", "DATASET_ID_REUSE_CONFLICT"], "reordered_rows_error": "DUPLICATE_DATASET_REPLAY", "state_change": "NONE"}
+    }
+  ],
+  "future_change_case": {
+    "id": "G2-AC-15",
+    "status": "NOT_CURRENT_APPROVAL",
+    "human_decision_required": true,
+    "current_threshold_percent": "30.000",
+    "proposed_threshold_percent": "70.000",
+    "expected_primary_sample_anomalies_if_separately_approved": [],
+    "issue_id": null,
+    "decision": null
+  }
+}

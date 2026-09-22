@@ -1,0 +1,12 @@
+{
+  "principal_ref": "WORK",
+  "role": "BUILDER",
+  "task_ref": "G2-PRODUCT",
+  "task_revision_ref": "R1",
+  "scope": "PUBLIC_SYNTHETIC_MATERIAL_ONLY",
+  "implementation_authorized": false,
+  "prototype_authorized": false,
+  "future_change_gate_ref": "G2-THRESHOLD-CHANGE-70",
+  "issue_binding_status": "PENDING_OWNER_PAGE",
+  "note": "This delegation covers preparation of a reviewable G2 product package. It does not create a Human decision or authorize code."
+}

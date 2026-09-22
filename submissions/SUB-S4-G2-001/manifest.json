@@ -1,0 +1,177 @@
+{
+  "schema": "factory-s4-public-submission-manifest/v0.1",
+  "status": "PROPOSED_NOT_APPROVED",
+  "scope": "SYNTHETIC_PUBLIC_G2_DRAFT",
+  "project_ref": "S4-P-001",
+  "submission": "SUB-S4-G2-001",
+  "required_gate": "G2",
+  "task_ref": "G2-PRODUCT",
+  "task_revision_ref": "R1",
+  "source_commit": null,
+  "manifest_self_hash_excluded": true,
+  "issue_binding": {
+    "status": "PENDING_OWNER_PAGE",
+    "issue_id": null,
+    "url": null,
+    "decision_repository_id": null,
+    "material_repository_id": null,
+    "owner_page_ref": null,
+    "source_commit": null,
+    "decision": null
+  },
+  "prior_gate_provenance": {
+    "submission": "SUB-S4-G1-001",
+    "human_reference": "批准 SUB-S4-G1-001 @d22e8c591309b5a555d04474e5e172159b008afc",
+    "source_commit": "d22e8c591309b5a555d04474e5e172159b008afc",
+    "meaning": "preparation authority for G2 material only"
+  },
+  "future_change_gate": {
+    "task_ref": "G2-THRESHOLD-CHANGE-70",
+    "current_threshold_percent": "30.000",
+    "proposed_threshold_percent": "70.000",
+    "included_in_current_g2_approval": false,
+    "human_decision_required": true,
+    "status": "NOT_CURRENT_APPROVAL",
+    "decision": null,
+    "issue_id": null
+  },
+  "exclusions": [
+    "REAL_DATA",
+    "CREDENTIALS",
+    "RAW_OPERATIONAL_LOGS",
+    "CONTROL_SOURCE",
+    "PRODUCT_CODE",
+    "PROTOTYPE",
+    "DEPLOYMENT",
+    "ADOPTION",
+    "CURRENT_70_PERCENT_APPROVAL",
+    "FABRICATED_ISSUE_BINDING"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 80,
+      "sha256": "b1ea6400733e5dfeb9de8f30b20c8b89d87d378f88480d5addb6b8a3ec0aae7c"
+    },
+    {
+      "path": "PUBLIC-SCOPE.md",
+      "bytes": 564,
+      "sha256": "b131bf55f0f97871a93013b3bbf6c46536320c739c9c212b9778cf254e3f6bdd"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1128,
+      "sha256": "602fde58e1828f2a294e4d4af1ab55b52f0e3148ae3ebd6c93c6901eb8146b42"
+    },
+    {
+      "path": "fixtures/G2-acceptance-cases.json",
+      "bytes": 5641,
+      "sha256": "8e984c8f3a02a04dafce53bf7168bb04a6e72ca144e74d8405134b23eaa9a980"
+    },
+    {
+      "path": "fixtures/G2-duplicate.csv",
+      "bytes": 61,
+      "sha256": "3edf394a3d577886fd77715841db65ca51c29b6baec10bab6343fec1470cff7e"
+    },
+    {
+      "path": "fixtures/G2-expected-results.json",
+      "bytes": 1863,
+      "sha256": "6e34cdb41b5250d553f85c8305091adf02796293a7b183178eb6bf7a96a2d430"
+    },
+    {
+      "path": "fixtures/G2-invalid-month.csv",
+      "bytes": 46,
+      "sha256": "d8a111ee014452e83455e05450147f34eeb5d793ff735d87d71a78d5ec1eada2"
+    },
+    {
+      "path": "fixtures/G2-negative.csv",
+      "bytes": 60,
+      "sha256": "7ba796b1fb19f5971b892b38be4a4d1592aed8b6a739d73b3e21a33f2da41597"
+    },
+    {
+      "path": "fixtures/G2-replay.json",
+      "bytes": 1289,
+      "sha256": "a61b89263cff8ea80fa23e9f6cf1d1e70829e1be80d39eed51497ce3f36d8d4f"
+    },
+    {
+      "path": "fixtures/G2-valid.csv",
+      "bytes": 75,
+      "sha256": "6605d0214b3d656f0e16a1352ceec1d9498052f64c3df8f158b483dd5690791a"
+    },
+    {
+      "path": "reviews/G1.md",
+      "bytes": 923,
+      "sha256": "49e1e344c47f01bf94ec34df0ae7da159351b2596161f9d9551bb092bc1de3c2"
+    },
+    {
+      "path": "reviews/G2.md",
+      "bytes": 1919,
+      "sha256": "e9322eb52f5e730cc875cc2c60bc0f431a39e480f08f4b7a50561cb4bd9c24df"
+    },
+    {
+      "path": "specs/acceptance.md",
+      "bytes": 4298,
+      "sha256": "6e7da84717f9e3acb3034ebad14f06fce110fd81fb0d47756f285b3b99c9e440"
+    },
+    {
+      "path": "specs/product.md",
+      "bytes": 1256,
+      "sha256": "f3499880e62261febecb38bc24919f1ec18fc3508f3549024f92fcfeb20f85c5"
+    },
+    {
+      "path": "specs/requirements.md",
+      "bytes": 8454,
+      "sha256": "a4332cdba1c5f1c58ea1683e560e03326126a3877b76caa0c9bfcd2b9571ee4e"
+    },
+    {
+      "path": "submissions/SUB-S4-G1-001/delegation.json",
+      "bytes": 79,
+      "sha256": "5e84ca68fb2a29ee0353a7739ff9865281fbae4e326b86e8109a8fe45edc4be6"
+    },
+    {
+      "path": "submissions/SUB-S4-G1-001/manifest.json",
+      "bytes": 1344,
+      "sha256": "aadbbb90a3094b38c14a27bd5d50fa48b6f64bef550f781fde632626bbb1fc73"
+    },
+    {
+      "path": "submissions/SUB-S4-G1-001/review.json",
+      "bytes": 749,
+      "sha256": "a6b683896360f26c7eeba118fae4e764b71fad56e80d3e82eeb0b7f436ebe280"
+    },
+    {
+      "path": "submissions/SUB-S4-G1-001/submission.json",
+      "bytes": 296,
+      "sha256": "3416de1d31cdd20c01bef2a76efb2b40189131e39071c93216b232ad1b3a27a4"
+    },
+    {
+      "path": "submissions/SUB-S4-G2-001/delegation.json",
+      "bytes": 465,
+      "sha256": "93577dcb247999e475590aa5077889205145dca02868f709bfb4de38609b16c5"
+    },
+    {
+      "path": "submissions/SUB-S4-G2-001/review.json",
+      "bytes": 998,
+      "sha256": "f6fb5965622ee9f5137c3737c4c804f7f9ea134769f4a0e48d35c615568ce072"
+    },
+    {
+      "path": "submissions/SUB-S4-G2-001/submission.json",
+      "bytes": 1042,
+      "sha256": "cd1b465c56a060eeed80926faf284674aa0e6492e0aa54ab9795774005eeb3b1"
+    },
+    {
+      "path": "tasks/G1-PRODUCT.json",
+      "bytes": 116,
+      "sha256": "cc386a9a390840beed400cac1ab1daf13e362c46e266ad4732882bff40624a37"
+    },
+    {
+      "path": "tasks/G2-PRODUCT.json",
+      "bytes": 998,
+      "sha256": "3275972c77ec4ea979cb86a79d166a9a41ea13b94c365780c3c48c8ccc476100"
+    },
+    {
+      "path": "tasks/G2-THRESHOLD-CHANGE-70.json",
+      "bytes": 1126,
+      "sha256": "74045af44d2fde47f4d5ad13fcd7e2721f44454a1bdf2f3b63fb9720d370fa62"
+    }
+  ]
+}

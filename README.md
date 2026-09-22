@@ -21,4 +21,4 @@ Not allowed here:
 - private or real business data;
 - production configuration or adoption records.
 
-Only the G1 product-definition material is present in the initial commit. Later product material depends on the corresponding Human Gate.
+The initial commit contained only the G1 product-definition material. The current tree also contains a proposed G2 requirements and acceptance package prepared after the recorded G1 approval; it remains pending its own Human decision and does not authorize prototype or implementation work.

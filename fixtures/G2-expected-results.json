@@ -1,0 +1,65 @@
+{
+  "schema": "factory-s4-g2-energy-oracle/v0.1",
+  "status": "PROPOSED_FIXTURE_ORACLE_NOT_EXECUTED",
+  "dataset_id": "g2-sample-2026-01-02",
+  "criterion_version": "G2-30PCT-R1",
+  "threshold_percent": "30.000",
+  "numeric_policy": {
+    "arithmetic": "DECIMAL_OR_FIXED_POINT_SCALE_1000",
+    "binary_float": false,
+    "output_scale": 3
+  },
+  "monthly_totals_kwh": {
+    "2026-01": "300.000",
+    "2026-02": "370.000"
+  },
+  "building_comparisons": {
+    "2026-01/A": {
+      "current_kwh": "100.000",
+      "prior_month": null,
+      "prior_kwh": null,
+      "comparison_status": "NO_PRIOR_MONTH",
+      "percent_change": null,
+      "anomaly": false
+    },
+    "2026-01/B": {
+      "current_kwh": "200.000",
+      "prior_month": null,
+      "prior_kwh": null,
+      "comparison_status": "NO_PRIOR_MONTH",
+      "percent_change": null,
+      "anomaly": false
+    },
+    "2026-02/A": {
+      "current_kwh": "160.000",
+      "prior_month": "2026-01",
+      "prior_kwh": "100.000",
+      "comparison_status": "COMPARED",
+      "percent_change": "60.000",
+      "anomaly": true
+    },
+    "2026-02/B": {
+      "current_kwh": "210.000",
+      "prior_month": "2026-01",
+      "prior_kwh": "200.000",
+      "comparison_status": "COMPARED",
+      "percent_change": "5.000",
+      "anomaly": false
+    }
+  },
+  "anomalies": ["2026-02/A"],
+  "only_primary_sample_anomaly": true,
+  "rejection_policy": {
+    "negative_consumption": "REJECT_ENTIRE_IMPORT",
+    "duplicate_month_building": "REJECT_ENTIRE_IMPORT",
+    "same_dataset_exact_replay": "REJECT_ENTIRE_IMPORT",
+    "same_dataset_changed_replay": "REJECT_ENTIRE_IMPORT",
+    "invalid_month_or_number": "REJECT_ENTIRE_IMPORT"
+  },
+  "comparison_policy": {
+    "missing_prior_month": "NO_PRIOR_MONTH",
+    "zero_prior_kwh": "ZERO_BASELINE",
+    "zero_is_not_zero_percent": true,
+    "threshold_operator": ">"
+  }
+}

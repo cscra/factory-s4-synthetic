@@ -1,0 +1,34 @@
+{
+  "schema": "factory-s4-public-task/v0.1",
+  "project_ref": "S4-P-001",
+  "task_ref": "G2-THRESHOLD-CHANGE-70",
+  "task_revision_ref": "R1",
+  "gate": "G2_CHANGE",
+  "status": "FUTURE_PROPOSAL_NOT_CURRENT_APPROVAL",
+  "classification": "IN_SCOPE_FUTURE_CHANGE",
+  "material_change": true,
+  "readiness_verified": true,
+  "valid_fail": false,
+  "implementation_authorized": false,
+  "prototype_authorized": false,
+  "current_criterion_version": "G2-30PCT-R1",
+  "proposed_criterion_version": "G2-70PCT-R1",
+  "current_threshold_percent": "30.000",
+  "proposed_threshold_percent": "70.000",
+  "human_decision_required": true,
+  "included_in_current_g2_approval": false,
+  "decision": null,
+  "issue_binding": {
+    "status": "PENDING_OWNER_PAGE",
+    "issue_id": null,
+    "url": null,
+    "decision_repository_id": null,
+    "source_commit": null
+  },
+  "impact_expectation": {
+    "primary_sample_anomalies_under_30": ["2026-02/A"],
+    "primary_sample_anomalies_under_70": [],
+    "old_30_percent_result": "PRESERVE_HISTORY_REEVALUATE_UNDER_NEW_CRITERION",
+    "approval_rule": "DO_NOT_USE_UNTIL_SEPARATE_HUMAN_GATE"
+  }
+}

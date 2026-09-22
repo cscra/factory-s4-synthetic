@@ -1,0 +1,34 @@
+{
+  "schema": "factory-s4-public-task/v0.1",
+  "project_ref": "S4-P-001",
+  "task_ref": "G2-PRODUCT",
+  "task_revision_ref": "R1",
+  "gate": "G2",
+  "status": "PROPOSED_NOT_APPROVED",
+  "classification": "IN_SCOPE",
+  "material_change": false,
+  "readiness_verified": true,
+  "valid_fail": false,
+  "implementation_authorized": false,
+  "prototype_authorized": false,
+  "acceptance_refs": [
+    "specs/requirements.md",
+    "specs/acceptance.md",
+    "fixtures/G2-valid.csv",
+    "fixtures/G2-expected-results.json",
+    "fixtures/G2-acceptance-cases.json"
+  ],
+  "prior_gate_provenance": {
+    "submission": "SUB-S4-G1-001",
+    "human_reference": "批准 SUB-S4-G1-001 @d22e8c591309b5a555d04474e5e172159b008afc",
+    "meaning": "preparation authority for G2 material only"
+  },
+  "future_change_gate_ref": "G2-THRESHOLD-CHANGE-70",
+  "issue_binding": {
+    "status": "PENDING_OWNER_PAGE",
+    "issue_id": null,
+    "url": null,
+    "decision_repository_id": null,
+    "source_commit": null
+  }
+}
