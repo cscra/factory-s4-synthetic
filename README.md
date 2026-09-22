@@ -22,4 +22,4 @@ Not allowed here:
 - private or real business data;
 - production configuration or adoption records.
 
-The initial commit contained only the G1 product-definition material. The current tree also contains a proposed G2 requirements and acceptance package prepared after the recorded G1 approval; it remains pending its own Human decision and does not authorize prototype or implementation work.
+The repository now preserves the completed G1 through G3 synthetic review packages and the proposed G4 technical implementation plan. The G4 material is a review candidate only: it contains no first-slice backend, persistence, connected browser flow, deployment, real business data, Control adoption, or 70 percent threshold change. Each later Gate still requires its own exact Human decision.
