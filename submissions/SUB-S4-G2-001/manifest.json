@@ -66,12 +66,12 @@
     {
       "path": "checks/G2-spec-oracle-result.json",
       "bytes": 7601,
-      "sha256": "21c05857ca68bbff26069fff1251a7b95a7a13e841cfec754f52ac4494e1419b"
+      "sha256": "50083dcad9d8fcc23bda4f3a95a76af4becdb23bd85b7302442542a3148bf9c5"
     },
     {
       "path": "checks/g2_spec_oracle_check.py",
-      "bytes": 17811,
-      "sha256": "c1d3fd2f55003367e23abb3db896470f2eb14919eaa4b89febe60e5fb19d61ed"
+      "bytes": 18105,
+      "sha256": "971812ae2e3bcea0ad99df0a86229715c8937b9f9bce2d6026da2565619e0e84"
     },
     {
       "path": "fixtures/G2-acceptance-cases.json",

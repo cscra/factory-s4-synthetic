@@ -239,8 +239,12 @@ def main() -> int:
     kind_mutation_rejected = bool(ac12_binding_mismatches(mutated_cases, invalid_doc["cases"]))
     mutated_invalid_cases = deepcopy(invalid_doc["cases"])
     mutated_invalid_ac12p = next(case for case in mutated_invalid_cases if case.get("id") == "G2-AC-12P")
-    mutated_invalid_ac12p["input"]["bytes_base64"] = base64.b64encode(b"month,building,kwh\n2026-01,A,1\n").decode("ascii")
-    position_mutation_rejected = not leading_bom_payload_is_valid(mutated_invalid_ac12p)
+    original_wire = base64.b64decode(ac12p["input"]["bytes_base64"], validate=True)
+    bom = b"\xef\xbb\xbf"
+    moved_bom_wire = original_wire[3:4] + original_wire[:3] + original_wire[4:]
+    mutated_invalid_ac12p["input"]["bytes_base64"] = base64.b64encode(moved_bom_wire).decode("ascii")
+    position_mutation_is_exact = moved_bom_wire[1:4] == bom and moved_bom_wire.count(bom) == 1
+    position_mutation_rejected = position_mutation_is_exact and not leading_bom_payload_is_valid(mutated_invalid_ac12p)
     check("MUTATION_NEGATIVE_SELF_TEST", kind_mutation_rejected and position_mutation_rejected, "in-memory wrong-kind and wrong-byte-position mutations fail closed")
     check("QUOTED_CASE_ID", ac19.get("dataset_id") == "g2-quoted-fields", "ordinary quoted-field case has its own dataset identity")
 

@@ -83,7 +83,7 @@
     },
     {
       "path": "checks/g2_spec_oracle_check.py",
-      "sha256": "c1d3fd2f55003367e23abb3db896470f2eb14919eaa4b89febe60e5fb19d61ed"
+      "sha256": "971812ae2e3bcea0ad99df0a86229715c8937b9f9bce2d6026da2565619e0e84"
     }
   ],
   "checks": [
