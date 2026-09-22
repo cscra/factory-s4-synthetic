@@ -1,0 +1,47 @@
+{
+  "schema": "factory-s4-public-task/v0.1",
+  "project_ref": "S4-P-001",
+  "task_ref": "G3-PRODUCT",
+  "task_revision_ref": "R1",
+  "gate": "G3",
+  "status": "PROPOSED_NOT_APPROVED",
+  "classification": "IN_SCOPE",
+  "material_change": false,
+  "readiness_verified": true,
+  "valid_fail": false,
+  "prototype_authorized_by_prior_gate": true,
+  "implementation_authorized": false,
+  "g4_technical_plan_authorized": false,
+  "g5_expansion_authorized": false,
+  "g6_acceptance_authorized": false,
+  "deployment_authorized": false,
+  "adoption_authorized": false,
+  "threshold_change_70_authorized": false,
+  "acceptance_refs": [
+    "specs/prototype.md",
+    "app/static/index.html",
+    "checks/g3_prototype_check.py",
+    "checks/G3-prototype-check-result.json"
+  ],
+  "prior_gate_provenance": {
+    "submission": "SUB-S4-G2-001",
+    "human_reference": "批准 SUB-S4-G2-001 @33f85f2656a561534f875ee5e690a4233d95aec6",
+    "source_commit": "33f85f2656a561534f875ee5e690a4233d95aec6",
+    "meaning": "authority to prepare the G3 synthetic prototype only"
+  },
+  "prototype_reviewed_candidate": {
+    "commit": "6670e42eac4b22052d238d717a765a8d16ed55e9",
+    "tree": "956b0f2d91eead8261667427cf9e2ff4164d96a1",
+    "independent_review": "PASS_ZERO_FINDINGS"
+  },
+  "issue_binding": {
+    "status": "PENDING_OWNER_PAGE",
+    "issue_id": null,
+    "url": null,
+    "decision_repository_id": null,
+    "material_repository_id": null,
+    "owner_page_ref": null,
+    "source_commit": null,
+    "decision": null
+  }
+}
