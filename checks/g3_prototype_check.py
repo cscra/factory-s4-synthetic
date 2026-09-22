@@ -83,9 +83,51 @@ def luminance(color):
     rgb = [int(color[i:i+2],16)/255 for i in (1,3,5)]
     rgb = [v/12.92 if v <= .04045 else ((v+.055)/1.055)**2.4 for v in rgb]
     return sum(v*w for v,w in zip(rgb,(.2126,.7152,.0722)))
-for foreground, background in [('#162d3d','#ffffff'),('#42586b','#f1f5f8'),('#ffffff','#1559a5'),('#8d301e','#ffffff')]:
+
+def contrast(foreground, background):
     a,b=sorted([luminance(foreground),luminance(background)])
-    check('text contrast >= 4.5: '+foreground+'/'+background,(b+.05)/(a+.05)>=4.5)
+    return (b+.05)/(a+.05)
+
+for foreground, background in [('#162d3d','#ffffff'),('#42586b','#f1f5f8'),('#ffffff','#1559a5'),('#8d301e','#ffffff')]:
+    check('text contrast >= 4.5: '+foreground+'/'+background,contrast(foreground,background)>=4.5)
+
+style = re.search(r'<style>(.*?)</style>', html, re.S).group(1)
+def css_properties(selector):
+    match = re.search(r'(?:^|})\s*' + re.escape(selector) + r'\{([^{}]*)\}', style)
+    assert match is not None, 'missing CSS rule: ' + selector
+    return dict(part.split(':',1) for part in match.group(1).split(';') if ':' in part)
+
+# Collect root custom properties so rendered color references are resolved to values.
+root_tokens = {key:value for key,value in css_properties(':root').items() if key.startswith('--')}
+def css_color(value):
+    token = re.search(r'var\((--[\w-]+)\)', value)
+    raw = root_tokens[token.group(1)] if token else value
+    match = re.search(r'#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?\b', raw)
+    assert match is not None, 'missing CSS color: ' + value
+    color = match.group(0).lower()
+    return '#' + ''.join(ch*2 for ch in color[1:]) if len(color) == 4 else color
+
+path = css_properties('.path')
+selected_path = css_properties('.path[aria-pressed=true]')
+focus = css_properties(':focus-visible')
+root = css_properties(':root')
+unselected_border = css_color(path['border'])
+unselected_fill = css_color(path['background'])
+page = css_color(root['background'])
+selected_border = css_color(selected_path['border'])
+selected_fill = css_color(selected_path['background'])
+focus_outline = css_color(focus['outline'])
+for label, foreground, background in [
+    ('unselected path boundary/interior', unselected_border, unselected_fill),
+    ('unselected path boundary/page', unselected_border, page),
+    ('selected path boundary/fill', selected_border, selected_fill),
+    ('selected path boundary/page', selected_border, page),
+    ('focus outline/white control', focus_outline, unselected_fill),
+    ('focus outline/page', focus_outline, page),
+    ('focus outline/selected fill', focus_outline, selected_fill),
+]:
+    ratio = contrast(foreground, background)
+    check(f'component contrast >= 3: {label} {foreground}/{background} ({ratio:.3f}:1)', ratio >= 3)
 # Parse JavaScript with the installed runtime without evaluating DOM or sending requests.
 subprocess.run(['node','--check'],input=code.encode(),check=True,capture_output=True)
 check('JavaScript syntax', True)
