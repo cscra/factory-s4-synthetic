@@ -1,0 +1,22 @@
+{
+  "data": {
+    "details": {
+      "binding": {
+        "decision_repository_id": "1378320648",
+        "issue_id": 5539933247,
+        "manifest_path": "submissions/SUB-S4-G3-001/manifest.json",
+        "material_repository_id": "1380306809",
+        "required_gate": "G3",
+        "source_commit": "51f32cafc7747d639989635ef85f99140d75b62c",
+        "submission": "SUB-S4-G3-001"
+      },
+      "review_text": "Synthetic public G3 three-path experience prototype fixed for Human review at package commit 51f32cafc7747d639989635ef85f99140d75b62c; decision Issue #5 (stable ID 5539933247, https://github.com/cscra/factory-control-records/issues/5) was created by yuhuan54880471 (ID 331624669) for page setup only and carries no decision authority; only a later exact decision comment by yuhuan0669 (ID 31118604) can decide G3. A valid G3 approval may freeze the reviewed interaction and information presentation and permit preparation of the G4 technical implementation plan only; it authorizes no implementation, G4-G6 result, deployment, real business use, or Control adoption, and it does not approve the G2 threshold change to 70 percent."
+    },
+    "producer_ref": "WORK",
+    "task_ref": "G3-PRODUCT",
+    "task_revision_ref": "R1"
+  },
+  "kind": "SUBMISSION_SNAPSHOT",
+  "mode": "S4_ACCEPTANCE",
+  "schema": "factory-fact/v0.7-s4.2"
+}
