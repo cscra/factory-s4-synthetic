@@ -1,0 +1,50 @@
+{
+  "exclusions": [
+    "REAL_DATA",
+    "CREDENTIALS",
+    "RAW_OPERATIONAL_LOGS",
+    "CONTROL_SOURCE",
+    "G2_SEMANTICS",
+    "PRODUCT_CODE",
+    "ADOPTION"
+  ],
+  "files": [
+    {
+      "bytes": 975,
+      "path": "README.md",
+      "sha256": "cff5d0af62ee48fc34f1e5bae91d08a1fc4f90491f6f9f7acbc78a10217f1198"
+    },
+    {
+      "bytes": 564,
+      "path": "PUBLIC-SCOPE.md",
+      "sha256": "b131bf55f0f97871a93013b3bbf6c46536320c739c9c212b9778cf254e3f6bdd"
+    },
+    {
+      "bytes": 1256,
+      "path": "specs/product.md",
+      "sha256": "f3499880e62261febecb38bc24919f1ec18fc3508f3549024f92fcfeb20f85c5"
+    },
+    {
+      "bytes": 923,
+      "path": "reviews/G1.md",
+      "sha256": "49e1e344c47f01bf94ec34df0ae7da159351b2596161f9d9551bb092bc1de3c2"
+    },
+    {
+      "bytes": 116,
+      "path": "tasks/G1-PRODUCT.json",
+      "sha256": "cc386a9a390840beed400cac1ab1daf13e362c46e266ad4732882bff40624a37"
+    },
+    {
+      "bytes": 79,
+      "path": "submissions/SUB-S4-G1-001/delegation.json",
+      "sha256": "5e84ca68fb2a29ee0353a7739ff9865281fbae4e326b86e8109a8fe45edc4be6"
+    }
+  ],
+  "project_ref": "S4-P-001",
+  "required_gate": "G1",
+  "schema": "factory-s4-public-submission-manifest/v0.1",
+  "scope": "SYNTHETIC_PUBLIC_G1_ONLY",
+  "submission": "SUB-S4-G1-001",
+  "task_ref": "G1-PRODUCT",
+  "task_revision_ref": "R1"
+}
