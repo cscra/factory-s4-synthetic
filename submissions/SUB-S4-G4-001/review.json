@@ -1,0 +1,22 @@
+{
+  "schema": "factory-fact/v0.7-s4.2",
+  "kind": "SUBMISSION_SNAPSHOT",
+  "mode": "S4_ACCEPTANCE",
+  "data": {
+    "task_ref": "BUILD-SLICE",
+    "task_revision_ref": "R1",
+    "producer_ref": "WORK",
+    "details": {
+      "binding": {
+        "decision_repository_id": "1378320648",
+        "issue_id": 5542567278,
+        "manifest_path": "submissions/SUB-S4-G4-001/manifest.json",
+        "material_repository_id": "1380306809",
+        "required_gate": "G4",
+        "source_commit": "2b7ad3eec9b25a79c2a458de5aebd318366a9ea4",
+        "submission": "SUB-S4-G4-001"
+      },
+      "review_text": "Synthetic public G4 first-slice technical plan and frozen completion contract fixed at package commit 2b7ad3eec9b25a79c2a458de5aebd318366a9ea4; decision Issue #6 (stable ID 5542567278, https://github.com/cscra/factory-control-records/issues/6) was created by ordinary Agent yuhuan54880470 (ID 330810629) for page setup only and carries no Human decision authority; only a later exact decision comment by yuhuan0669 (ID 31118604) can decide G4. A valid G4 approval may authorize BUILD-SLICE@R1 / IMPLEMENT_SLICE for the described first slice only; it does not accept the implementation result, release later batches or G5/G6, deploy the sample, use real business data, adopt Control, or approve the separate 30-to-70-percent change."
+    }
+  }
+}
