@@ -55,18 +55,28 @@
     },
     {
       "path": "PUBLIC-SCOPE.md",
-      "bytes": 564,
-      "sha256": "b131bf55f0f97871a93013b3bbf6c46536320c739c9c212b9778cf254e3f6bdd"
+      "bytes": 817,
+      "sha256": "cb1f2dcab88e26b06287bba805e7eb6806530121dd9cf5fd6181240e40c9b297"
     },
     {
       "path": "README.md",
-      "bytes": 1128,
-      "sha256": "602fde58e1828f2a294e4d4af1ab55b52f0e3148ae3ebd6c93c6901eb8146b42"
+      "bytes": 1219,
+      "sha256": "3610410de88580a5b11ba17ace87d87ed0e852168ecb61a54d9b9412e6e4640a"
+    },
+    {
+      "path": "checks/G2-spec-oracle-result.json",
+      "bytes": 7281,
+      "sha256": "1bcd7c591179868ec5a8789150a57608e2101133a0b76eee753861db42c16ff1"
+    },
+    {
+      "path": "checks/g2_spec_oracle_check.py",
+      "bytes": 15392,
+      "sha256": "01629c33ef98e6cb4f71bd04e2494fdeebe82bb8fcf4fac86f4012911183c4a7"
     },
     {
       "path": "fixtures/G2-acceptance-cases.json",
-      "bytes": 5641,
-      "sha256": "8e984c8f3a02a04dafce53bf7168bb04a6e72ca144e74d8405134b23eaa9a980"
+      "bytes": 14001,
+      "sha256": "686ba6c1bd596e6cb4f2037d66adb5f8fd93ef917413439822c1be57e93a9ed8"
     },
     {
       "path": "fixtures/G2-duplicate.csv",
@@ -75,8 +85,13 @@
     },
     {
       "path": "fixtures/G2-expected-results.json",
-      "bytes": 1863,
-      "sha256": "6e34cdb41b5250d553f85c8305091adf02796293a7b183178eb6bf7a96a2d430"
+      "bytes": 2305,
+      "sha256": "270a64c403270a485f7b08220a2117d7696f10b32210d8f400fa2ed011554053"
+    },
+    {
+      "path": "fixtures/G2-invalid-input-cases.json",
+      "bytes": 4560,
+      "sha256": "7bd949da44e0169eefd8bbc15a28b82b83166e1a228df43dafdddadc550b1721"
     },
     {
       "path": "fixtures/G2-invalid-month.csv",
@@ -84,9 +99,19 @@
       "sha256": "d8a111ee014452e83455e05450147f34eeb5d793ff735d87d71a78d5ec1eada2"
     },
     {
+      "path": "fixtures/G2-near-threshold.json",
+      "bytes": 932,
+      "sha256": "ca0b9ae68a1dbc2342220d4f796ffc428b82eb06cc721293457197d7ff58cc55"
+    },
+    {
       "path": "fixtures/G2-negative.csv",
       "bytes": 60,
       "sha256": "7ba796b1fb19f5971b892b38be4a4d1592aed8b6a739d73b3e21a33f2da41597"
+    },
+    {
+      "path": "fixtures/G2-quoted-fields.json",
+      "bytes": 374,
+      "sha256": "02baae6fcdc810ab64b9cab272c73751a5bc3e33d94eba9742bd1b37f1b9e95d"
     },
     {
       "path": "fixtures/G2-replay.json",
@@ -105,13 +130,23 @@
     },
     {
       "path": "reviews/G2.md",
-      "bytes": 1919,
-      "sha256": "e9322eb52f5e730cc875cc2c60bc0f431a39e480f08f4b7a50561cb4bd9c24df"
+      "bytes": 2621,
+      "sha256": "d8c8c7782d2ccf0076edaca46b63a5f93018687d386e76299aba451f5f216cc0"
     },
     {
       "path": "specs/acceptance.md",
-      "bytes": 4298,
-      "sha256": "6e7da84717f9e3acb3034ebad14f06fce110fd81fb0d47756f285b3b99c9e440"
+      "bytes": 7307,
+      "sha256": "3f112889d2ea517918513dd35286cd767c7eea9b063b7f8577ae037a2b2c6a29"
+    },
+    {
+      "path": "specs/error-catalog.json",
+      "bytes": 5670,
+      "sha256": "96516ca7bacd949fbef84902d682cf6248801d1cfda9e37a096810da4ebe3cef"
+    },
+    {
+      "path": "specs/permissions.json",
+      "bytes": 1718,
+      "sha256": "2b50686537cb49e7e7affda4617ec08c4ce72b14342495aaea1d5b83e406afbb"
     },
     {
       "path": "specs/product.md",
@@ -120,8 +155,8 @@
     },
     {
       "path": "specs/requirements.md",
-      "bytes": 8454,
-      "sha256": "a4332cdba1c5f1c58ea1683e560e03326126a3877b76caa0c9bfcd2b9571ee4e"
+      "bytes": 11358,
+      "sha256": "0dae8dd4fa4d0caea494a23805566e428398945cffc4ba65a0f9ff03b4a50230"
     },
     {
       "path": "submissions/SUB-S4-G1-001/delegation.json",
@@ -145,8 +180,8 @@
     },
     {
       "path": "submissions/SUB-S4-G2-001/delegation.json",
-      "bytes": 465,
-      "sha256": "93577dcb247999e475590aa5077889205145dca02868f709bfb4de38609b16c5"
+      "bytes": 577,
+      "sha256": "6c3ca54be9db59df0a738cb7d658a66c2289da6369da2d8ad7721650eff77744"
     },
     {
       "path": "submissions/SUB-S4-G2-001/review.json",
@@ -165,8 +200,8 @@
     },
     {
       "path": "tasks/G2-PRODUCT.json",
-      "bytes": 998,
-      "sha256": "3275972c77ec4ea979cb86a79d166a9a41ea13b94c365780c3c48c8ccc476100"
+      "bytes": 1393,
+      "sha256": "8ddc24af3c73fbe9b2b9b9a11c7842fabb168292621eced8c88a13ea17e088e4"
     },
     {
       "path": "tasks/G2-THRESHOLD-CHANGE-70.json",

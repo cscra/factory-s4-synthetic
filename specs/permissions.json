@@ -1,0 +1,40 @@
+{
+  "schema": "factory-s4-g2-permission-model/v0.1",
+  "status": "PROPOSED_NOT_APPROVED",
+  "identity_model": "NO_LOGIN_IN_G2",
+  "identity_enforcement": "NOT_PROVEN",
+  "role_matrix": {
+    "ANALYST": {
+      "import": "ALLOW_NEW_DATASET",
+      "view_results": "ALLOW_SYNTHETIC_RESULTS",
+      "view_history": "ALLOW_SYNTHETIC_HISTORY",
+      "replay": "ALLOW_ATTEMPT_DATASET_REPLAY_REJECTED",
+      "modify": "DENY_DIRECT_EDIT_DELETE_RECOMPUTE"
+    },
+    "REVIEWER": {
+      "import": "DENY_ROLE_NOT_PERMITTED",
+      "view_results": "ALLOW_SYNTHETIC_RESULTS",
+      "view_history": "ALLOW_SYNTHETIC_HISTORY",
+      "replay": "DENY_ROLE_NOT_PERMITTED",
+      "modify": "DENY_MUTATION_NOT_PERMITTED"
+    }
+  },
+  "global_boundaries": {
+    "accepted_dataset_edit": "DENY_IMMUTABLE_HISTORY",
+    "derived_result_edit": "DENY_IMMUTABLE_HISTORY",
+    "dataset_delete": "DENY_IMMUTABLE_HISTORY",
+    "criterion_threshold_edit": "DENY_REQUIRES_SEPARATE_HUMAN_GATE",
+    "new_dataset_id": "ONLY_ANALYST_IMPORT_AFTER_FULL_VALIDATION"
+  },
+  "no_login_acceptance_limitations": [
+    "The G2 material has no authentication or identity provider.",
+    "The matrix is a workflow contract and acceptance target, not a security boundary.",
+    "A prototype without login must label analyst/reviewer separation as NOT_PROVEN; a role selector or UI hiding is not identity isolation.",
+    "G2 technical acceptance may verify read/write action semantics and immutable history, but cannot claim per-user authorization until a separately approved identity layer exists."
+  ],
+  "future_threshold_change": {
+    "task_ref": "G2-THRESHOLD-CHANGE-70",
+    "requires_human_gate": true,
+    "included_in_current_g2_approval": false
+  }
+}

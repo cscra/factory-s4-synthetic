@@ -1,0 +1,247 @@
+{
+  "schema": "factory-s4-g2-spec-oracle-result/v0.1",
+  "status": "PASS",
+  "read_only": true,
+  "product_code": false,
+  "checker": "checks/g2_spec_oracle_check.py",
+  "input_hashes": [
+    {
+      "path": "README.md",
+      "sha256": "3610410de88580a5b11ba17ace87d87ed0e852168ecb61a54d9b9412e6e4640a"
+    },
+    {
+      "path": "PUBLIC-SCOPE.md",
+      "sha256": "cb1f2dcab88e26b06287bba805e7eb6806530121dd9cf5fd6181240e40c9b297"
+    },
+    {
+      "path": "specs/requirements.md",
+      "sha256": "0dae8dd4fa4d0caea494a23805566e428398945cffc4ba65a0f9ff03b4a50230"
+    },
+    {
+      "path": "specs/acceptance.md",
+      "sha256": "3f112889d2ea517918513dd35286cd767c7eea9b063b7f8577ae037a2b2c6a29"
+    },
+    {
+      "path": "specs/permissions.json",
+      "sha256": "2b50686537cb49e7e7affda4617ec08c4ce72b14342495aaea1d5b83e406afbb"
+    },
+    {
+      "path": "specs/error-catalog.json",
+      "sha256": "96516ca7bacd949fbef84902d682cf6248801d1cfda9e37a096810da4ebe3cef"
+    },
+    {
+      "path": "tasks/G2-PRODUCT.json",
+      "sha256": "8ddc24af3c73fbe9b2b9b9a11c7842fabb168292621eced8c88a13ea17e088e4"
+    },
+    {
+      "path": "tasks/G2-THRESHOLD-CHANGE-70.json",
+      "sha256": "74045af44d2fde47f4d5ad13fcd7e2721f44454a1bdf2f3b63fb9720d370fa62"
+    },
+    {
+      "path": "fixtures/G2-valid.csv",
+      "sha256": "6605d0214b3d656f0e16a1352ceec1d9498052f64c3df8f158b483dd5690791a"
+    },
+    {
+      "path": "fixtures/G2-duplicate.csv",
+      "sha256": "3edf394a3d577886fd77715841db65ca51c29b6baec10bab6343fec1470cff7e"
+    },
+    {
+      "path": "fixtures/G2-invalid-month.csv",
+      "sha256": "d8a111ee014452e83455e05450147f34eeb5d793ff735d87d71a78d5ec1eada2"
+    },
+    {
+      "path": "fixtures/G2-negative.csv",
+      "sha256": "7ba796b1fb19f5971b892b38be4a4d1592aed8b6a739d73b3e21a33f2da41597"
+    },
+    {
+      "path": "fixtures/G2-replay.json",
+      "sha256": "a61b89263cff8ea80fa23e9f6cf1d1e70829e1be80d39eed51497ce3f36d8d4f"
+    },
+    {
+      "path": "fixtures/G2-expected-results.json",
+      "sha256": "270a64c403270a485f7b08220a2117d7696f10b32210d8f400fa2ed011554053"
+    },
+    {
+      "path": "fixtures/G2-acceptance-cases.json",
+      "sha256": "686ba6c1bd596e6cb4f2037d66adb5f8fd93ef917413439822c1be57e93a9ed8"
+    },
+    {
+      "path": "fixtures/G2-invalid-input-cases.json",
+      "sha256": "7bd949da44e0169eefd8bbc15a28b82b83166e1a228df43dafdddadc550b1721"
+    },
+    {
+      "path": "fixtures/G2-near-threshold.json",
+      "sha256": "ca0b9ae68a1dbc2342220d4f796ffc428b82eb06cc721293457197d7ff58cc55"
+    },
+    {
+      "path": "fixtures/G2-quoted-fields.json",
+      "sha256": "02baae6fcdc810ab64b9cab272c73751a5bc3e33d94eba9742bd1b37f1b9e95d"
+    },
+    {
+      "path": "submissions/SUB-S4-G2-001/delegation.json",
+      "sha256": "6c3ca54be9db59df0a738cb7d658a66c2289da6369da2d8ad7721650eff77744"
+    },
+    {
+      "path": "checks/g2_spec_oracle_check.py",
+      "sha256": "01629c33ef98e6cb4f71bd04e2494fdeebe82bb8fcf4fac86f4012911183c4a7"
+    }
+  ],
+  "checks": [
+    {
+      "id": "SPEC_REQUIRED_RULES",
+      "result": "PASS",
+      "detail": "required permission, wire, building, and precision rules are stated"
+    },
+    {
+      "id": "ACCEPTANCE_BOUNDARY",
+      "result": "PASS",
+      "detail": "split invalid cases, near-threshold case, and future gate are documented"
+    },
+    {
+      "id": "ROLE_NAMES",
+      "result": "PASS",
+      "detail": "role matrix has exactly ANALYST and REVIEWER"
+    },
+    {
+      "id": "ANALYST_ACTIONS",
+      "result": "PASS",
+      "detail": "ANALYST can import/read, can only attempt replay, and cannot mutate"
+    },
+    {
+      "id": "REVIEWER_ACTIONS",
+      "result": "PASS",
+      "detail": "REVIEWER is read-only for results/history"
+    },
+    {
+      "id": "NO_IDENTITY_CLAIM",
+      "result": "PASS",
+      "detail": "no-login limitation is explicit"
+    },
+    {
+      "id": "ERROR_CODES_UNIQUE",
+      "result": "PASS",
+      "detail": "error codes are unique"
+    },
+    {
+      "id": "ERROR_PRIORITIES_TOTAL",
+      "result": "PASS",
+      "detail": "error priority order is total and deterministic"
+    },
+    {
+      "id": "CSV_CONTRACT_MACHINE_READABLE",
+      "result": "PASS",
+      "detail": "UTF-8/BOM/RFC4180/line-ending/blank-record choices are fixed"
+    },
+    {
+      "id": "PRIMARY_NO_BOM",
+      "result": "PASS",
+      "detail": "primary fixture is UTF-8 without BOM"
+    },
+    {
+      "id": "PRIMARY_SHAPE",
+      "result": "PASS",
+      "detail": "primary CSV has exact month/building/kwh columns"
+    },
+    {
+      "id": "PRIMARY_TOTALS",
+      "result": "PASS",
+      "detail": "primary monthly totals are 300 and 370 kWh"
+    },
+    {
+      "id": "PRIMARY_PERCENTAGES",
+      "result": "PASS",
+      "detail": "primary percentages are 60.000 and 5.000"
+    },
+    {
+      "id": "PRIMARY_ORACLE",
+      "result": "PASS",
+      "detail": "only A is anomalous in the primary sample"
+    },
+    {
+      "id": "PRIMARY_POLICY",
+      "result": "PASS",
+      "detail": "primary oracle fixes quantization, rounding, and precision"
+    },
+    {
+      "id": "NEAR_THRESHOLD_UNIQUE",
+      "result": "PASS",
+      "detail": "333.333 to 433.333 quantizes to 30.000 and is not anomalous"
+    },
+    {
+      "id": "NEAR_THRESHOLD_BASIS",
+      "result": "PASS",
+      "detail": "near-threshold basis is machine-readable"
+    },
+    {
+      "id": "CASE_IDS_UNIQUE",
+      "result": "PASS",
+      "detail": "acceptance case IDs are unique"
+    },
+    {
+      "id": "AC12_SPLIT",
+      "result": "PASS",
+      "detail": "AC-12 is split into 18 machine-checkable one-input cases"
+    },
+    {
+      "id": "INVALID_CODES_MAPPED",
+      "result": "PASS",
+      "detail": "every invalid fixture maps to a catalog code"
+    },
+    {
+      "id": "AC12_ONE_ERROR",
+      "result": "PASS",
+      "detail": "each AC-12 case has exactly one expected error"
+    },
+    {
+      "id": "REPLAY_ONE_VARIANT",
+      "result": "PASS",
+      "detail": "each replay scenario has one fragment and one error"
+    },
+    {
+      "id": "FIXTURE_REFS",
+      "result": "PASS",
+      "detail": "acceptance fixture references resolve"
+    },
+    {
+      "id": "SPECIAL_CASES",
+      "result": "PASS",
+      "detail": "near-threshold and ordinary-quote cases are present"
+    },
+    {
+      "id": "ROLE_CASE_BINDINGS",
+      "result": "PASS",
+      "detail": "acceptance role cases use the machine-readable uppercase role keys"
+    },
+    {
+      "id": "INVALID_CASE_BINDINGS",
+      "result": "PASS",
+      "detail": "each split invalid case mirrors its fixture ID, dataset ID, and one catalog error"
+    },
+    {
+      "id": "QUOTED_CASE_ID",
+      "result": "PASS",
+      "detail": "ordinary quoted-field case has its own dataset identity"
+    },
+    {
+      "id": "CURRENT_TASK_SCOPE",
+      "result": "PASS",
+      "detail": "G2-PRODUCT remains preparation-only"
+    },
+    {
+      "id": "TASK_ACCEPTANCE_REFS",
+      "result": "PASS",
+      "detail": "every G2-PRODUCT acceptance reference resolves"
+    },
+    {
+      "id": "PENDING_BINDINGS",
+      "result": "PASS",
+      "detail": "current G2 binding remains pending"
+    },
+    {
+      "id": "FUTURE_GATE_SEPARATE",
+      "result": "PASS",
+      "detail": "30 to 70 remains an independent undecided gate"
+    }
+  ],
+  "failure_count": 0
+}

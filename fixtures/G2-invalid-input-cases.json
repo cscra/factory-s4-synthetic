@@ -1,0 +1,169 @@
+{
+  "schema": "factory-s4-g2-invalid-input-cases/v0.1",
+  "status": "PROPOSED_FIXTURE_ORACLE_NOT_EXECUTED",
+  "wire_contract_ref": "specs/error-catalog.json",
+  "cases": [
+    {
+      "id": "G2-AC-12A",
+      "kind": "KWH_EXPONENT",
+      "dataset_id": "g2-invalid-kwh-exponent",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,A,1e2\n"
+      },
+      "expected_error": "INVALID_KWH_FORMAT"
+    },
+    {
+      "id": "G2-AC-12B",
+      "kind": "KWH_PLUS_SIGN",
+      "dataset_id": "g2-invalid-kwh-plus",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,A,+1\n"
+      },
+      "expected_error": "INVALID_KWH_FORMAT"
+    },
+    {
+      "id": "G2-AC-12C",
+      "kind": "KWH_SCALE_EXCEEDED",
+      "dataset_id": "g2-invalid-kwh-scale",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,A,1.0001\n"
+      },
+      "expected_error": "KWH_SCALE_EXCEEDED"
+    },
+    {
+      "id": "G2-AC-12D",
+      "kind": "EXTRA_FIELD",
+      "dataset_id": "g2-invalid-extra-field",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,A,1,extra\n"
+      },
+      "expected_error": "INVALID_ROW_SHAPE"
+    },
+    {
+      "id": "G2-AC-12E",
+      "kind": "EMPTY_KWH",
+      "dataset_id": "g2-invalid-empty-kwh",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,A,\n"
+      },
+      "expected_error": "INVALID_KWH_FORMAT"
+    },
+    {
+      "id": "G2-AC-12F",
+      "kind": "WHITESPACE_PADDED_KWH",
+      "dataset_id": "g2-invalid-whitespace-kwh",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,A, 1\n"
+      },
+      "expected_error": "INVALID_KWH_FORMAT"
+    },
+    {
+      "id": "G2-AC-12G",
+      "kind": "BUILDING_DISALLOWED_CHAR",
+      "dataset_id": "g2-invalid-building-char",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,A/B,1\n"
+      },
+      "expected_error": "INVALID_BUILDING"
+    },
+    {
+      "id": "G2-AC-12H",
+      "kind": "BUILDING_TOO_LONG",
+      "dataset_id": "g2-invalid-building-length",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1\n"
+      },
+      "expected_error": "INVALID_BUILDING"
+    },
+    {
+      "id": "G2-AC-12I",
+      "kind": "BUILDING_CONTROL_CHAR",
+      "dataset_id": "g2-invalid-building-control",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,\"A\tB\",1\n"
+      },
+      "expected_error": "INVALID_BUILDING"
+    },
+    {
+      "id": "G2-AC-12J",
+      "kind": "INVALID_UTF8",
+      "dataset_id": "g2-invalid-utf8",
+      "input": {
+        "bytes_hex": "6d6f6e74682c6275696c64696e672c6b77680aff0a"
+      },
+      "expected_error": "INVALID_UTF8"
+    },
+    {
+      "id": "G2-AC-12K",
+      "kind": "MIXED_LINE_ENDINGS",
+      "dataset_id": "g2-invalid-line-endings",
+      "input": {
+        "csv": "month,building,kwh\r\n2026-01,A,1\n2026-02,B,2\n"
+      },
+      "expected_error": "INVALID_CSV_LINE_ENDING"
+    },
+    {
+      "id": "G2-AC-12L",
+      "kind": "MALFORMED_QUOTE",
+      "dataset_id": "g2-invalid-quote",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,\"A,1\n"
+      },
+      "expected_error": "INVALID_ROW_SHAPE"
+    },
+    {
+      "id": "G2-AC-12M",
+      "kind": "BLANK_RECORD",
+      "dataset_id": "g2-invalid-blank-record",
+      "input": {
+        "csv": "month,building,kwh\n\n2026-01,A,1\n"
+      },
+      "expected_error": "INVALID_ROW_SHAPE"
+    },
+    {
+      "id": "G2-AC-12N",
+      "kind": "INVALID_HEADER",
+      "dataset_id": "g2-invalid-header",
+      "input": {
+        "csv": "month,site,kwh\n2026-01,A,1\n"
+      },
+      "expected_error": "INVALID_HEADER"
+    },
+    {
+      "id": "G2-AC-12O",
+      "kind": "EMPTY_DATASET",
+      "dataset_id": "g2-empty-dataset",
+      "input": {
+        "csv": "month,building,kwh\n"
+      },
+      "expected_error": "EMPTY_DATASET"
+    },
+    {
+      "id": "G2-AC-12P",
+      "kind": "LEADING_BOM",
+      "dataset_id": "g2-invalid-bom",
+      "input": {
+        "csv": "﻿month,building,kwh\n2026-01,A,1\n"
+      },
+      "expected_error": "INVALID_CSV_BOM"
+    },
+    {
+      "id": "G2-AC-12Q",
+      "kind": "EMBEDDED_NEWLINE_IN_QUOTED_FIELD",
+      "dataset_id": "g2-invalid-embedded-newline",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,\"A\nB\",1\n"
+      },
+      "expected_error": "INVALID_ROW_SHAPE"
+    },
+    {
+      "id": "G2-AC-12R",
+      "kind": "INVALID_DATASET_ID",
+      "dataset_id": "G2-UPPER",
+      "input": {
+        "csv": "month,building,kwh\n2026-01,A,1\n"
+      },
+      "expected_error": "INVALID_DATASET_ID"
+    }
+  ]
+}

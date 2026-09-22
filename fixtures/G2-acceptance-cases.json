@@ -10,8 +10,13 @@
       "input_file": "fixtures/G2-valid.csv",
       "expected": {
         "status": "ACCEPT",
-        "monthly_totals_kwh": {"2026-01": "300.000", "2026-02": "370.000"},
-        "anomalies": ["2026-02/A"],
+        "monthly_totals_kwh": {
+          "2026-01": "300.000",
+          "2026-02": "370.000"
+        },
+        "anomalies": [
+          "2026-02/A"
+        ],
         "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
       }
     },
@@ -20,44 +25,76 @@
       "kind": "INVALID_MONTH",
       "dataset_id": "g2-invalid-month",
       "input_file": "fixtures/G2-invalid-month.csv",
-      "expected": {"status": "REJECT", "error": "INVALID_MONTH", "state_change": "NONE"}
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_MONTH",
+        "state_change": "NONE"
+      }
     },
     {
       "id": "G2-AC-03",
       "kind": "NEGATIVE_KWH",
       "dataset_id": "g2-negative-atomic",
       "input_file": "fixtures/G2-negative.csv",
-      "expected": {"status": "REJECT", "error": "NEGATIVE_KWH", "state_change": "NONE"}
+      "expected": {
+        "status": "REJECT",
+        "error": "NEGATIVE_KWH",
+        "state_change": "NONE"
+      }
     },
     {
       "id": "G2-AC-04",
       "kind": "DUPLICATE_ROW_KEY",
       "dataset_id": "g2-duplicate-atomic",
       "input_file": "fixtures/G2-duplicate.csv",
-      "expected": {"status": "REJECT", "error": "DUPLICATE_MONTH_BUILDING", "state_change": "NONE"}
+      "expected": {
+        "status": "REJECT",
+        "error": "DUPLICATE_MONTH_BUILDING",
+        "state_change": "NONE"
+      }
     },
     {
       "id": "G2-AC-05",
       "kind": "EXACT_REPLAY",
       "dataset_id": "g2-sample-2026-01-02",
       "input_file": "fixtures/G2-replay.json#exact_replay",
-      "expected": {"status": "REJECT", "error": "DUPLICATE_DATASET_REPLAY", "state_change": "NONE"}
+      "expected": {
+        "status": "REJECT",
+        "error": "DUPLICATE_DATASET_REPLAY",
+        "state_change": "NONE"
+      }
     },
     {
       "id": "G2-AC-06",
       "kind": "CHANGED_REPLAY",
       "dataset_id": "g2-sample-2026-01-02",
       "input_file": "fixtures/G2-replay.json#changed_replay",
-      "expected": {"status": "REJECT", "error": "DATASET_ID_REUSE_CONFLICT", "state_change": "NONE"}
+      "expected": {
+        "status": "REJECT",
+        "error": "DATASET_ID_REUSE_CONFLICT",
+        "state_change": "NONE"
+      }
     },
     {
       "id": "G2-AC-07",
       "kind": "NO_PRIOR_MONTH",
       "dataset_id": "g2-no-prior",
-      "rows": [{"month": "2026-02", "building": "C", "kwh": "10"}],
+      "rows": [
+        {
+          "month": "2026-02",
+          "building": "C",
+          "kwh": "10"
+        }
+      ],
       "expected": {
         "status": "ACCEPT",
-        "comparison": {"2026-02/C": {"comparison_status": "NO_PRIOR_MONTH", "percent_change": null, "anomaly": false}},
+        "comparison": {
+          "2026-02/C": {
+            "comparison_status": "NO_PRIOR_MONTH",
+            "percent_change": null,
+            "anomaly": false
+          }
+        },
         "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
       }
     },
@@ -66,12 +103,26 @@
       "kind": "ZERO_BASELINE",
       "dataset_id": "g2-zero-baseline",
       "rows": [
-        {"month": "2026-01", "building": "D", "kwh": "0"},
-        {"month": "2026-02", "building": "D", "kwh": "5"}
+        {
+          "month": "2026-01",
+          "building": "D",
+          "kwh": "0"
+        },
+        {
+          "month": "2026-02",
+          "building": "D",
+          "kwh": "5"
+        }
       ],
       "expected": {
         "status": "ACCEPT",
-        "comparison": {"2026-02/D": {"comparison_status": "ZERO_BASELINE", "percent_change": null, "anomaly": false}},
+        "comparison": {
+          "2026-02/D": {
+            "comparison_status": "ZERO_BASELINE",
+            "percent_change": null,
+            "anomaly": false
+          }
+        },
         "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
       }
     },
@@ -80,17 +131,42 @@
       "kind": "EXACT_DECIMAL",
       "dataset_id": "g2-decimal-exact",
       "rows": [
-        {"month": "2026-01", "building": "E", "kwh": "0.1"},
-        {"month": "2026-01", "building": "F", "kwh": "0.2"},
-        {"month": "2026-02", "building": "E", "kwh": "0.3"},
-        {"month": "2026-02", "building": "F", "kwh": "0.2"}
+        {
+          "month": "2026-01",
+          "building": "E",
+          "kwh": "0.1"
+        },
+        {
+          "month": "2026-01",
+          "building": "F",
+          "kwh": "0.2"
+        },
+        {
+          "month": "2026-02",
+          "building": "E",
+          "kwh": "0.3"
+        },
+        {
+          "month": "2026-02",
+          "building": "F",
+          "kwh": "0.2"
+        }
       ],
       "expected": {
         "status": "ACCEPT",
-        "monthly_totals_kwh": {"2026-01": "0.300", "2026-02": "0.500"},
+        "monthly_totals_kwh": {
+          "2026-01": "0.300",
+          "2026-02": "0.500"
+        },
         "comparison": {
-          "2026-02/E": {"percent_change": "200.000", "anomaly": true},
-          "2026-02/F": {"percent_change": "0.000", "anomaly": false}
+          "2026-02/E": {
+            "percent_change": "200.000",
+            "anomaly": true
+          },
+          "2026-02/F": {
+            "percent_change": "0.000",
+            "anomaly": false
+          }
         },
         "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
       }
@@ -100,44 +176,341 @@
       "kind": "EXACT_THRESHOLD",
       "dataset_id": "g2-threshold-exact",
       "rows": [
-        {"month": "2026-01", "building": "G", "kwh": "100"},
-        {"month": "2026-02", "building": "G", "kwh": "130"}
+        {
+          "month": "2026-01",
+          "building": "G",
+          "kwh": "100"
+        },
+        {
+          "month": "2026-02",
+          "building": "G",
+          "kwh": "130"
+        }
       ],
-      "expected": {"status": "ACCEPT", "comparison": {"2026-02/G": {"percent_change": "30.000", "anomaly": false}}}
+      "expected": {
+        "status": "ACCEPT",
+        "comparison": {
+          "2026-02/G": {
+            "percent_change": "30.000",
+            "anomaly": false
+          }
+        }
+      }
     },
     {
       "id": "G2-AC-11",
       "kind": "ABOVE_THRESHOLD",
       "dataset_id": "g2-threshold-above",
       "rows": [
-        {"month": "2026-01", "building": "H", "kwh": "100"},
-        {"month": "2026-02", "building": "H", "kwh": "130.001"}
+        {
+          "month": "2026-01",
+          "building": "H",
+          "kwh": "100"
+        },
+        {
+          "month": "2026-02",
+          "building": "H",
+          "kwh": "130.001"
+        }
       ],
-      "expected": {"status": "ACCEPT", "comparison": {"2026-02/H": {"percent_change": "30.001", "anomaly": true}}}
-    },
-    {
-      "id": "G2-AC-12",
-      "kind": "STRICT_NUMBER_AND_ROW_SHAPE",
-      "dataset_id": "g2-invalid-number-shape",
-      "rows": [{"month": "2026-01", "building": "I", "kwh": "1e2"}],
-      "expected": {"status": "REJECT", "error": "INVALID_KWH_FORMAT", "state_change": "NONE"}
+      "expected": {
+        "status": "ACCEPT",
+        "comparison": {
+          "2026-02/H": {
+            "percent_change": "30.001",
+            "anomaly": true
+          }
+        }
+      }
     },
     {
       "id": "G2-AC-13",
       "kind": "ATOMIC_MIXED_BATCH",
       "dataset_id": "g2-mixed-invalid",
       "rows": [
-        {"month": "2026-01", "building": "J", "kwh": "10"},
-        {"month": "2026-01", "building": "K", "kwh": "-0.001"}
+        {
+          "month": "2026-01",
+          "building": "J",
+          "kwh": "10"
+        },
+        {
+          "month": "2026-01",
+          "building": "K",
+          "kwh": "-0.001"
+        }
       ],
-      "expected": {"status": "REJECT", "error": "NEGATIVE_KWH", "state_change": "NONE", "valid_prefix_must_not_persist": true}
+      "expected": {
+        "status": "REJECT",
+        "error": "NEGATIVE_KWH",
+        "state_change": "NONE",
+        "valid_prefix_must_not_persist": true
+      }
     },
     {
       "id": "G2-AC-14",
-      "kind": "REPLAY_IDENTITY",
+      "kind": "REORDERED_REPLAY",
       "dataset_id": "g2-sample-2026-01-02",
-      "input_file": "fixtures/G2-replay.json",
-      "expected": {"status": "REJECT", "errors": ["DUPLICATE_DATASET_REPLAY", "DATASET_ID_REUSE_CONFLICT"], "reordered_rows_error": "DUPLICATE_DATASET_REPLAY", "state_change": "NONE"}
+      "input_file": "fixtures/G2-replay.json#reordered_replay",
+      "expected": {
+        "status": "REJECT",
+        "error": "DUPLICATE_DATASET_REPLAY",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12A",
+      "kind": "KWH_EXPONENT",
+      "dataset_id": "g2-invalid-kwh-exponent",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12A",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_KWH_FORMAT",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12B",
+      "kind": "KWH_PLUS_SIGN",
+      "dataset_id": "g2-invalid-kwh-plus",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12B",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_KWH_FORMAT",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12C",
+      "kind": "KWH_SCALE_EXCEEDED",
+      "dataset_id": "g2-invalid-kwh-scale",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12C",
+      "expected": {
+        "status": "REJECT",
+        "error": "KWH_SCALE_EXCEEDED",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12D",
+      "kind": "EXTRA_FIELD",
+      "dataset_id": "g2-invalid-extra-field",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12D",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_ROW_SHAPE",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12E",
+      "kind": "EMPTY_KWH",
+      "dataset_id": "g2-invalid-empty-kwh",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12E",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_KWH_FORMAT",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12F",
+      "kind": "WHITESPACE_PADDED_KWH",
+      "dataset_id": "g2-invalid-whitespace-kwh",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12F",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_KWH_FORMAT",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12G",
+      "kind": "BUILDING_DISALLOWED_CHAR",
+      "dataset_id": "g2-invalid-building-char",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12G",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_BUILDING",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12H",
+      "kind": "BUILDING_TOO_LONG",
+      "dataset_id": "g2-invalid-building-length",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12H",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_BUILDING",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12I",
+      "kind": "BUILDING_CONTROL_CHAR",
+      "dataset_id": "g2-invalid-building-control",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12I",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_BUILDING",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12J",
+      "kind": "INVALID_UTF8",
+      "dataset_id": "g2-invalid-utf8",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12J",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_UTF8",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12K",
+      "kind": "MIXED_LINE_ENDINGS",
+      "dataset_id": "g2-invalid-line-endings",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12K",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_CSV_LINE_ENDING",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12L",
+      "kind": "MALFORMED_QUOTE",
+      "dataset_id": "g2-invalid-quote",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12L",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_ROW_SHAPE",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12M",
+      "kind": "BLANK_RECORD",
+      "dataset_id": "g2-invalid-blank-record",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12M",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_ROW_SHAPE",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12N",
+      "kind": "INVALID_HEADER",
+      "dataset_id": "g2-invalid-header",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12N",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_HEADER",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12O",
+      "kind": "EMPTY_DATASET",
+      "dataset_id": "g2-empty-dataset",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12O",
+      "expected": {
+        "status": "REJECT",
+        "error": "EMPTY_DATASET",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12P",
+      "kind": "BOM_IN_MIDDLE",
+      "dataset_id": "g2-invalid-bom",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12P",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_CSV_BOM",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12Q",
+      "kind": "EMBEDDED_NEWLINE_IN_QUOTED_FIELD",
+      "dataset_id": "g2-invalid-embedded-newline",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12Q",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_ROW_SHAPE",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-12R",
+      "kind": "INVALID_DATASET_ID",
+      "dataset_id": "G2-UPPER",
+      "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12R",
+      "expected": {
+        "status": "REJECT",
+        "error": "INVALID_DATASET_ID",
+        "state_change": "NONE"
+      }
+    },
+    {
+      "id": "G2-AC-16",
+      "kind": "ANALYST_ACTION_BOUNDARY",
+      "role": "ANALYST",
+      "input_file": "specs/permissions.json#ANALYST",
+      "expected": {
+        "import": "ALLOW_NEW_DATASET",
+        "view_results": "ALLOW_SYNTHETIC_RESULTS",
+        "view_history": "ALLOW_SYNTHETIC_HISTORY",
+        "replay": "ALLOW_ATTEMPT_DATASET_REPLAY_REJECTED",
+        "modify": "DENY_DIRECT_EDIT_DELETE_RECOMPUTE",
+        "identity_enforcement": "NOT_PROVEN"
+      }
+    },
+    {
+      "id": "G2-AC-17",
+      "kind": "REVIEWER_ACTION_BOUNDARY",
+      "role": "REVIEWER",
+      "input_file": "specs/permissions.json#REVIEWER",
+      "expected": {
+        "import": "DENY_ROLE_NOT_PERMITTED",
+        "view_results": "ALLOW_SYNTHETIC_RESULTS",
+        "view_history": "ALLOW_SYNTHETIC_HISTORY",
+        "replay": "DENY_ROLE_NOT_PERMITTED",
+        "modify": "DENY_MUTATION_NOT_PERMITTED",
+        "identity_enforcement": "NOT_PROVEN"
+      }
+    },
+    {
+      "id": "G2-AC-18",
+      "kind": "NEAR_THRESHOLD_EXACT_COMPARISON",
+      "dataset_id": "g2-near-threshold",
+      "input_file": "fixtures/G2-near-threshold.json",
+      "expected": {
+        "status": "ACCEPT",
+        "percent_change_display": "30.000",
+        "percent_change_exact_fraction": {
+          "numerator": "10000000",
+          "denominator": "333333"
+        },
+        "threshold_comparison_basis": "QUANTIZED_DECIMAL_0.001",
+        "rounding": "ROUND_HALF_EVEN",
+        "anomaly": false,
+        "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
+      }
+    },
+    {
+      "id": "G2-AC-19",
+      "kind": "QUOTED_ORDINARY_FIELDS",
+      "dataset_id": "g2-quoted-fields",
+      "input_file": "fixtures/G2-quoted-fields.json",
+      "expected": {
+        "status": "ACCEPT",
+        "same_result_as": "G2-AC-01",
+        "state_change": "COMMIT_COMPLETE_DATASET_AND_DERIVED_RESULTS"
+      }
     }
   ],
   "future_change_case": {

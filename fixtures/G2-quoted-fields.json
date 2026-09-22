@@ -1,0 +1,8 @@
+{
+  "schema": "factory-s4-g2-quoted-fields-fixture/v0.1",
+  "status": "PROPOSED_FIXTURE_ORACLE_NOT_EXECUTED",
+  "dataset_id": "g2-quoted-fields",
+  "wire_encoding": "UTF-8_NO_BOM",
+  "csv": "month,building,kwh\n\"2026-01\",\"A\",\"100\"\n\"2026-01\",\"B\",\"200\"\n\"2026-02\",\"A\",\"160\"\n\"2026-02\",\"B\",\"210\"\n",
+  "expected": "SAME_CANONICAL_RESULT_AS_G2-AC-01"
+}

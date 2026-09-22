@@ -1,0 +1,151 @@
+{
+  "schema": "factory-s4-g2-error-catalog/v0.1",
+  "status": "PROPOSED_NOT_APPROVED",
+  "selection_rule": {
+    "preflight": "ROLE_NOT_PERMITTED is selected before reading payload for a disallowed action.",
+    "wire": "After an allowed action, lower numeric priority wins. UTF-8, BOM, line-ending, envelope, and header checks precede row fields.",
+    "same_priority": "Within one row, validate fields in month, building, kwh order; across rows use ascending physical record order.",
+    "batch_order": "Validate the complete payload before duplicate or replay checks; the first applicable category by priority wins.",
+    "state": "Every listed rejection is fail-closed and leaves the pre-import state unchanged."
+  },
+  "csv_contract": {
+    "encoding": "UTF-8 strict",
+    "bom": "BOM is not accepted at the start or anywhere in the payload; return INVALID_CSV_BOM.",
+    "rfc4180": "Comma delimiter and ordinary double-quote field quoting are accepted; doubled quotes follow RFC 4180; embedded LF/CRLF inside a quoted field is rejected as INVALID_ROW_SHAPE; backslash is not an escape.",
+    "line_endings": "LF and CRLF are each accepted as record separators; bare CR and mixed LF/CRLF are rejected.",
+    "blank_records": "Blank records are INVALID_ROW_SHAPE; one terminal record separator is allowed; header-only is EMPTY_DATASET."
+  },
+  "building_contract": {
+    "regex": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+    "length": "1..64 ASCII characters",
+    "control_characters": "All C0 controls, DEL, whitespace padding, and embedded CR/LF are rejected."
+  },
+  "codes": [
+    {
+      "code": "ROLE_NOT_PERMITTED",
+      "priority": 5,
+      "scope": "action",
+      "trigger": "Reviewer import/replay or any role action outside the matrix.",
+      "state_effect": "No state mutation; reject before CSV parsing."
+    },
+    {
+      "code": "INVALID_UTF8",
+      "priority": 10,
+      "scope": "wire",
+      "trigger": "Input bytes are not valid UTF-8.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "INVALID_CSV_BOM",
+      "priority": 20,
+      "scope": "wire",
+      "trigger": "A UTF-8 BOM appears at the start or anywhere in the payload; BOM is never accepted.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "INVALID_CSV_LINE_ENDING",
+      "priority": 30,
+      "scope": "wire",
+      "trigger": "Bare CR or mixed LF/CRLF record endings.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "INVALID_DATASET_ID",
+      "priority": 40,
+      "scope": "envelope",
+      "trigger": "Missing or non-canonical dataset_id.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "INVALID_HEADER",
+      "priority": 50,
+      "scope": "csv",
+      "trigger": "Header is not exactly month,building,kwh after UTF-8 decoding; BOM is handled by INVALID_CSV_BOM.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "EMPTY_DATASET",
+      "priority": 60,
+      "scope": "csv",
+      "trigger": "A valid header has no data record.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "INVALID_ROW_SHAPE",
+      "priority": 70,
+      "scope": "csv",
+      "trigger": "RFC 4180 parse error, wrong field count, blank record, embedded field newline, or malformed quote.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "INVALID_MONTH",
+      "priority": 80,
+      "scope": "field",
+      "trigger": "Month is not a valid YYYY-MM calendar token.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "INVALID_BUILDING",
+      "priority": 90,
+      "scope": "field",
+      "trigger": "Building is empty, non-ASCII/disallowed, over 64 characters, whitespace-padded, or contains a control character after CSV parsing.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "NEGATIVE_KWH",
+      "priority": 100,
+      "scope": "field",
+      "trigger": "Kwh is a signed negative decimal token.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "KWH_SCALE_EXCEEDED",
+      "priority": 110,
+      "scope": "field",
+      "trigger": "Kwh is decimal but has more than three fractional digits.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "INVALID_KWH_FORMAT",
+      "priority": 120,
+      "scope": "field",
+      "trigger": "Kwh is empty, plus-signed, exponent-form, non-decimal, or whitespace-padded.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "DUPLICATE_MONTH_BUILDING",
+      "priority": 130,
+      "scope": "batch",
+      "trigger": "Two rows share one (month,building) key within a batch.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "DUPLICATE_DATASET_REPLAY",
+      "priority": 140,
+      "scope": "replay",
+      "trigger": "Existing dataset_id has the same canonical sorted rows.",
+      "state_effect": "No state mutation; existing history remains unchanged."
+    },
+    {
+      "code": "DATASET_ID_REUSE_CONFLICT",
+      "priority": 150,
+      "scope": "replay",
+      "trigger": "Existing dataset_id has different canonical sorted rows.",
+      "state_effect": "No state mutation; existing history remains unchanged."
+    },
+    {
+      "code": "MUTATION_NOT_PERMITTED",
+      "priority": 160,
+      "scope": "mutation",
+      "trigger": "Direct edit/delete/recompute of accepted or derived history.",
+      "state_effect": "No state mutation."
+    },
+    {
+      "code": "IMMUTABLE_HISTORY",
+      "priority": 170,
+      "scope": "mutation",
+      "trigger": "An operation attempts to overwrite or delete an accepted record.",
+      "state_effect": "No state mutation."
+    }
+  ]
+}

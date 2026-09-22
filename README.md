@@ -12,6 +12,7 @@ Allowed here:
 - synthetic sample code and tests after the corresponding Human Gate;
 - generated CSV fixtures approved for the sample;
 - sanitized summaries intended for public review.
+- read-only specification/oracle consistency checkers and their deterministic result JSON.
 
 Not allowed here:
 

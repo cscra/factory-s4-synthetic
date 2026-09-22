@@ -7,7 +7,13 @@
   "numeric_policy": {
     "arithmetic": "DECIMAL_OR_FIXED_POINT_SCALE_1000",
     "binary_float": false,
-    "output_scale": 3
+    "output_scale": 3,
+    "percentage_context_precision": 50,
+    "percentage_display_quantum": "0.001",
+    "percentage_display_rounding": "ROUND_HALF_EVEN",
+    "threshold_comparison_basis": "QUANTIZED_DECIMAL_0.001",
+    "threshold_percent_exact": "30.000",
+    "anomaly_uses_display_percent": true
   },
   "monthly_totals_kwh": {
     "2026-01": "300.000",
@@ -47,7 +53,9 @@
       "anomaly": false
     }
   },
-  "anomalies": ["2026-02/A"],
+  "anomalies": [
+    "2026-02/A"
+  ],
   "only_primary_sample_anomaly": true,
   "rejection_policy": {
     "negative_consumption": "REJECT_ENTIRE_IMPORT",
@@ -60,6 +68,9 @@
     "missing_prior_month": "NO_PRIOR_MONTH",
     "zero_prior_kwh": "ZERO_BASELINE",
     "zero_is_not_zero_percent": true,
-    "threshold_operator": ">"
-  }
+    "threshold_operator": ">",
+    "display_percent_name": "percent_change",
+    "anomaly_uses_display_percent": true
+  },
+  "near_threshold_reference": "fixtures/G2-near-threshold.json"
 }

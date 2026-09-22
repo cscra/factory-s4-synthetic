@@ -6,6 +6,8 @@
   "scope": "PUBLIC_SYNTHETIC_MATERIAL_ONLY",
   "implementation_authorized": false,
   "prototype_authorized": false,
+  "checker_ref": "checks/g2_spec_oracle_check.py",
+  "checker_result_ref": "checks/G2-spec-oracle-result.json",
   "future_change_gate_ref": "G2-THRESHOLD-CHANGE-70",
   "issue_binding_status": "PENDING_OWNER_PAGE",
   "note": "This delegation covers preparation of a reviewable G2 product package. It does not create a Human decision or authorize code."

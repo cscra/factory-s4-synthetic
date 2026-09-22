@@ -14,9 +14,20 @@
   "acceptance_refs": [
     "specs/requirements.md",
     "specs/acceptance.md",
+    "specs/permissions.json",
+    "specs/error-catalog.json",
     "fixtures/G2-valid.csv",
+    "fixtures/G2-duplicate.csv",
     "fixtures/G2-expected-results.json",
-    "fixtures/G2-acceptance-cases.json"
+    "fixtures/G2-invalid-month.csv",
+    "fixtures/G2-acceptance-cases.json",
+    "fixtures/G2-invalid-input-cases.json",
+    "fixtures/G2-negative.csv",
+    "fixtures/G2-near-threshold.json",
+    "fixtures/G2-quoted-fields.json",
+    "fixtures/G2-replay.json",
+    "checks/g2_spec_oracle_check.py",
+    "checks/G2-spec-oracle-result.json"
   ],
   "prior_gate_provenance": {
     "submission": "SUB-S4-G1-001",

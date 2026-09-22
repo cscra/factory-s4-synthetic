@@ -1,0 +1,35 @@
+{
+  "schema": "factory-s4-g2-near-threshold-fixture/v0.1",
+  "status": "PROPOSED_FIXTURE_ORACLE_NOT_EXECUTED",
+  "dataset_id": "g2-near-threshold",
+  "criterion_version": "G2-30PCT-R1",
+  "rows": [
+    {
+      "month": "2026-01",
+      "building": "N",
+      "kwh": "333.333"
+    },
+    {
+      "month": "2026-02",
+      "building": "N",
+      "kwh": "433.333"
+    }
+  ],
+  "expected": {
+    "status": "ACCEPT",
+    "comparison_status": "COMPARED",
+    "prior_kwh": "333.333",
+    "current_kwh": "433.333",
+    "percent_change_exact_fraction": {
+      "numerator": "10000000",
+      "denominator": "333333"
+    },
+    "percent_change_display": "30.000",
+    "threshold_percent": "30.000",
+    "threshold_comparison_basis": "QUANTIZED_DECIMAL_0.001",
+    "rounding": "ROUND_HALF_EVEN",
+    "decimal_context_precision": 50,
+    "anomaly": false,
+    "unique_result": "UNQUANTIZED_RATIO_QUANTIZES_TO_30.000_AND_IS_NOT_ANOMALOUS"
+  }
+}
