@@ -1,30 +1,22 @@
 {
-  "schema": "factory-s4-public-submission-review/v0.1",
-  "kind": "SUBMISSION_SNAPSHOT",
-  "mode": "S4_ACCEPTANCE",
-  "status": "PENDING_HUMAN_REVIEW",
   "data": {
-    "producer_ref": "WORK",
-    "task_ref": "G2-PRODUCT",
-    "task_revision_ref": "R1",
-    "review_text": "Synthetic public G2 requirements and acceptance fixtures prepared for Human review; no prototype, implementation, deployment, production use, or future 30-to-70 change approval.",
     "details": {
       "binding": {
-        "required_gate": "G2",
-        "submission": "SUB-S4-G2-001",
+        "decision_repository_id": "1378320648",
+        "issue_id": 5534844760,
         "manifest_path": "submissions/SUB-S4-G2-001/manifest.json",
-        "issue_binding_status": "PENDING_OWNER_PAGE",
-        "issue_id": null,
-        "url": null,
-        "decision_repository_id": null,
-        "source_commit": null
+        "material_repository_id": "1380306809",
+        "required_gate": "G2",
+        "source_commit": "33f85f2656a561534f875ee5e690a4233d95aec6",
+        "submission": "SUB-S4-G2-001"
       },
-      "future_change_gate": {
-        "task_ref": "G2-THRESHOLD-CHANGE-70",
-        "status": "NOT_CURRENT_APPROVAL",
-        "decision": null,
-        "issue_id": null
-      }
-    }
-  }
+      "review_text": "Synthetic public G2 requirements and acceptance fixtures fixed for Human review; no prototype, implementation, deployment, real business use, or future 30-to-70 threshold approval."
+    },
+    "producer_ref": "WORK",
+    "task_ref": "G2-PRODUCT",
+    "task_revision_ref": "R1"
+  },
+  "kind": "SUBMISSION_SNAPSHOT",
+  "mode": "S4_ACCEPTANCE",
+  "schema": "factory-fact/v0.7-s4.2"
 }

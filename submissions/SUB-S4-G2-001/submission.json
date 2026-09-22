@@ -1,34 +1,9 @@
 {
-  "schema": "factory-s4-public-submission/v0.1",
-  "submission": "SUB-S4-G2-001",
-  "project_ref": "S4-P-001",
-  "task_ref": "G2-PRODUCT",
-  "task_revision_ref": "R1",
-  "required_gate": "G2",
-  "approval_status": "PENDING_HUMAN_DECISION",
+  "decision_repository_id": "1378320648",
+  "issue_id": 5534844760,
   "manifest_path": "submissions/SUB-S4-G2-001/manifest.json",
-  "source_commit": null,
-  "issue_binding": {
-    "status": "PENDING_OWNER_PAGE",
-    "issue_id": null,
-    "url": null,
-    "decision_repository_id": null,
-    "material_repository_id": null,
-    "owner_page_ref": null,
-    "source_commit": null,
-    "decision": null
-  },
-  "prior_gate_provenance": {
-    "submission": "SUB-S4-G1-001",
-    "human_reference": "批准 SUB-S4-G1-001 @d22e8c591309b5a555d04474e5e172159b008afc",
-    "source_commit": "d22e8c591309b5a555d04474e5e172159b008afc",
-    "scope": "G1 preparation authority only"
-  },
-  "future_change_gate": {
-    "task_ref": "G2-THRESHOLD-CHANGE-70",
-    "included_in_this_submission": false,
-    "human_decision_required": true,
-    "decision": null,
-    "issue_id": null
-  }
+  "material_repository_id": "1380306809",
+  "required_gate": "G2",
+  "source_commit": "33f85f2656a561534f875ee5e690a4233d95aec6",
+  "submission": "SUB-S4-G2-001"
 }
