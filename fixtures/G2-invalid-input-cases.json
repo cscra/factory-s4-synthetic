@@ -143,7 +143,7 @@
       "kind": "LEADING_BOM",
       "dataset_id": "g2-invalid-bom",
       "input": {
-        "csv": "﻿month,building,kwh\n2026-01,A,1\n"
+        "bytes_base64": "77u/bW9udGgsYnVpbGRpbmcsa3doCjIwMjYtMDEsQSwxCg=="
       },
       "expected_error": "INVALID_CSV_BOM"
     },

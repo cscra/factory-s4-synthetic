@@ -424,7 +424,7 @@
     },
     {
       "id": "G2-AC-12P",
-      "kind": "BOM_IN_MIDDLE",
+      "kind": "LEADING_BOM",
       "dataset_id": "g2-invalid-bom",
       "input_file": "fixtures/G2-invalid-input-cases.json#G2-AC-12P",
       "expected": {

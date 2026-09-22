@@ -8,7 +8,9 @@ requested, deterministic result JSON.
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
+from copy import deepcopy
 import hashlib
 import io
 import json
@@ -25,6 +27,48 @@ BUILDING_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$")
 
 def load_json(root: Path, relative: str) -> Any:
     return json.loads((root / relative).read_text(encoding="utf-8"))
+
+
+def ac12_binding_mismatches(case_list: list[dict[str, Any]], invalid_cases: list[dict[str, Any]]) -> list[str]:
+    """Return mismatches across the complete machine-readable AC-12 binding."""
+    acceptance_by_id = {case.get("id"): case for case in case_list}
+    mismatches: list[str] = []
+    for invalid in invalid_cases:
+        case_id = invalid.get("id")
+        acceptance = acceptance_by_id.get(case_id)
+        expected_binding = {
+            "id": case_id,
+            "kind": invalid.get("kind"),
+            "dataset_id": invalid.get("dataset_id"),
+            "ref": f"fixtures/G2-invalid-input-cases.json#{case_id}",
+            "error": invalid.get("expected_error"),
+            "status": "REJECT",
+            "state": "NONE",
+        }
+        actual_binding = {
+            "id": (acceptance or {}).get("id"),
+            "kind": (acceptance or {}).get("kind"),
+            "dataset_id": (acceptance or {}).get("dataset_id"),
+            "ref": (acceptance or {}).get("input_file"),
+            "error": ((acceptance or {}).get("expected") or {}).get("error"),
+            "status": ((acceptance or {}).get("expected") or {}).get("status"),
+            "state": ((acceptance or {}).get("expected") or {}).get("state_change"),
+        }
+        for field in expected_binding:
+            if actual_binding[field] != expected_binding[field]:
+                mismatches.append(f"{case_id}:{field}")
+    return mismatches
+
+
+def leading_bom_payload_is_valid(invalid_case: dict[str, Any]) -> bool:
+    """Validate AC-12P's exact encoded wire position without mutating its input."""
+    try:
+        encoded = invalid_case["input"]["bytes_base64"]
+        payload = base64.b64decode(encoded, validate=True)
+    except (KeyError, TypeError, ValueError):
+        return False
+    bom = b"\xef\xbb\xbf"
+    return payload.startswith(bom) and payload.count(bom) == 1
 
 
 def main() -> int:
@@ -184,16 +228,20 @@ def main() -> int:
         and ac17.get("input_file") == "specs/permissions.json#REVIEWER",
         "acceptance role cases use the machine-readable uppercase role keys",
     )
-    invalid_case_consistent = True
-    for invalid in invalid_doc["cases"]:
-        case = next((candidate for candidate in case_list if candidate["id"] == invalid["id"]), None)
-        expected = (case or {}).get("expected", {})
-        invalid_case_consistent &= bool(case)
-        invalid_case_consistent &= case.get("input_file") == f"fixtures/G2-invalid-input-cases.json#{invalid['id']}" if case else False
-        invalid_case_consistent &= (case or {}).get("dataset_id") == invalid.get("dataset_id")
-        invalid_case_consistent &= expected.get("error") == invalid.get("expected_error")
-        invalid_case_consistent &= expected.get("status") == "REJECT" and expected.get("state_change") == "NONE"
-    check("INVALID_CASE_BINDINGS", invalid_case_consistent, "each split invalid case mirrors its fixture ID, dataset ID, and one catalog error")
+    binding_mismatches = ac12_binding_mismatches(case_list, invalid_doc["cases"])
+    check("AC12_BINDINGS", not binding_mismatches, "each split invalid case mirrors id, kind, dataset, ref, error, status, and state")
+    ac12p = next((case for case in invalid_doc["cases"] if case.get("id") == "G2-AC-12P"), {})
+    check("AC12P_BOM_POSITION", leading_bom_payload_is_valid(ac12p), "AC-12P base64 payload starts with one UTF-8 BOM and contains no second BOM")
+    # Prove the two critical guards reject tampering, using only in-memory copies.
+    mutated_cases = deepcopy(case_list)
+    mutated_ac12p = next(case for case in mutated_cases if case.get("id") == "G2-AC-12P")
+    mutated_ac12p["kind"] = "BOM_IN_MIDDLE"
+    kind_mutation_rejected = bool(ac12_binding_mismatches(mutated_cases, invalid_doc["cases"]))
+    mutated_invalid_cases = deepcopy(invalid_doc["cases"])
+    mutated_invalid_ac12p = next(case for case in mutated_invalid_cases if case.get("id") == "G2-AC-12P")
+    mutated_invalid_ac12p["input"]["bytes_base64"] = base64.b64encode(b"month,building,kwh\n2026-01,A,1\n").decode("ascii")
+    position_mutation_rejected = not leading_bom_payload_is_valid(mutated_invalid_ac12p)
+    check("MUTATION_NEGATIVE_SELF_TEST", kind_mutation_rejected and position_mutation_rejected, "in-memory wrong-kind and wrong-byte-position mutations fail closed")
     check("QUOTED_CASE_ID", ac19.get("dataset_id") == "g2-quoted-fields", "ordinary quoted-field case has its own dataset identity")
 
     # Task/gate and pending-binding invariants.

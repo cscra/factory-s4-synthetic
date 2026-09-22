@@ -65,18 +65,18 @@
     },
     {
       "path": "checks/G2-spec-oracle-result.json",
-      "bytes": 7281,
-      "sha256": "1bcd7c591179868ec5a8789150a57608e2101133a0b76eee753861db42c16ff1"
+      "bytes": 7601,
+      "sha256": "21c05857ca68bbff26069fff1251a7b95a7a13e841cfec754f52ac4494e1419b"
     },
     {
       "path": "checks/g2_spec_oracle_check.py",
-      "bytes": 15392,
-      "sha256": "01629c33ef98e6cb4f71bd04e2494fdeebe82bb8fcf4fac86f4012911183c4a7"
+      "bytes": 17811,
+      "sha256": "c1d3fd2f55003367e23abb3db896470f2eb14919eaa4b89febe60e5fb19d61ed"
     },
     {
       "path": "fixtures/G2-acceptance-cases.json",
-      "bytes": 14001,
-      "sha256": "686ba6c1bd596e6cb4f2037d66adb5f8fd93ef917413439822c1be57e93a9ed8"
+      "bytes": 13999,
+      "sha256": "fdca26fd1f0135a20b2983c79a3eebcd36f3640502c31be6ee0b8b92b2794536"
     },
     {
       "path": "fixtures/G2-duplicate.csv",
@@ -90,8 +90,8 @@
     },
     {
       "path": "fixtures/G2-invalid-input-cases.json",
-      "bytes": 4560,
-      "sha256": "7bd949da44e0169eefd8bbc15a28b82b83166e1a228df43dafdddadc550b1721"
+      "bytes": 4581,
+      "sha256": "2af5b17cd172221e051a048bcf2860b74d19e3d870c0b89eaed335b5236214a7"
     },
     {
       "path": "fixtures/G2-invalid-month.csv",
