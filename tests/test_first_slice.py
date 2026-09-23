@@ -187,8 +187,8 @@ class DomainTests(unittest.TestCase):
         )
         assert_no_float(self, result)
 
-    def test_undefined_50_digit_percentage_fails_closed_with_stable_code(self):
-        from app.domain import CalculationError, parse_dataset
+    def test_50_digit_ratio_can_render_large_three_decimal_percentage(self):
+        from app.domain import parse_dataset
 
         huge = "9" * 4301
         raw = (
@@ -196,9 +196,10 @@ class DomainTests(unittest.TestCase):
             "2026-01,A,1\n"
             f"2026-02,A,{huge}\n"
         ).encode("ascii")
-        with self.assertRaises(CalculationError) as caught:
-            parse_dataset("g2-large-ratio", raw)
-        self.assertEqual(caught.exception.code, "INTERNAL_CALCULATION_ERROR")
+        result = parse_dataset("g2-large-ratio", raw).to_public_dict()
+        comparison = result["building_comparisons"]["2026-02/A"]
+        self.assertEqual(comparison["percent_change"], "1" + "0" * 4303 + ".000")
+        self.assertTrue(comparison["anomaly"])
 
 
 class StorageTests(unittest.TestCase):
@@ -480,7 +481,7 @@ class HttpTests(unittest.TestCase):
         self.assertEqual(body["error"]["code"], "INTERNAL_STORAGE_ERROR")
         self.assertEqual(store.snapshot(), before)
 
-    def test_large_legal_http_value_is_accepted_and_undefined_ratio_is_atomic(self):
+    def test_large_legal_http_value_and_ratio_are_accepted(self):
         from app.storage import EnergyStore
 
         huge = "9" * 4301
@@ -496,25 +497,25 @@ class HttpTests(unittest.TestCase):
         self.assertEqual(created["dataset"]["rows"][0]["kwh"], huge + ".000")
 
         store = EnergyStore(self.db_path)
-        before = store.snapshot()
-        undefined_raw = (
+        ratio_raw = (
             "month,building,kwh\n"
             "2026-01,A,1\n"
             f"2026-02,A,{huge}\n"
         ).encode("ascii")
-        status, content_type, rejected = request(
+        status, content_type, accepted = request(
             self.port,
             "POST",
             "/api/datasets",
-            undefined_raw,
+            ratio_raw,
             self.post_headers(dataset_id="g2-large-ratio-http"),
         )
-        self.assertEqual(status, 500)
+        self.assertEqual(status, 201)
         self.assertEqual(content_type, "application/json; charset=utf-8")
         self.assertEqual(
-            rejected["error"]["code"], "INTERNAL_CALCULATION_ERROR"
+            accepted["dataset"]["building_comparisons"]["2026-02/A"]["percent_change"],
+            "1" + "0" * 4303 + ".000",
         )
-        self.assertEqual(store.snapshot(), before)
+        self.assertEqual(store.get("g2-large-ratio-http"), accepted["dataset"])
 
     def test_public_4xx_codes_are_frozen_business_or_explicit_transport(self):
         from http import HTTPStatus
@@ -670,10 +671,6 @@ class HttpTests(unittest.TestCase):
         )
         self.assertIn("if (maxScrollLeft <= 0) return;", script)
         self.assertIn("comparisonTableWrap.scrollLeft = boundedScrollLeft;", script)
-        self.assertRegex(
-            script,
-            r"(?s)function clearResult\(\)\s*\{.*?comparisonTableWrap\.scrollLeft\s*=\s*0;",
-        )
         self.assertNotIn("300.000", script)
         self.assertNotIn("370.000", script)
 

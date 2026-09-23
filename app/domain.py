@@ -266,7 +266,87 @@ def candidate_from_parts(
     )
 
 
+def _record_line_ending(text: str) -> str:
+    """Select one record separator without counting forbidden quoted newlines."""
+
+    state = "FIELD_START"
+    endings: set[str] = set()
+    index = 0
+    while index < len(text):
+        character = text[index]
+        if character == "\r":
+            if index + 1 >= len(text) or text[index + 1] != "\n":
+                raise DomainError("INVALID_CSV_LINE_ENDING")
+            if state != "QUOTED":
+                endings.add("\r\n")
+                state = "FIELD_START"
+            index += 2
+            continue
+        if character == "\n":
+            if state != "QUOTED":
+                endings.add("\n")
+                state = "FIELD_START"
+            index += 1
+            continue
+        if state == "FIELD_START":
+            if character == '"':
+                state = "QUOTED"
+            elif character != ",":
+                state = "UNQUOTED"
+        elif state == "UNQUOTED":
+            if character == ",":
+                state = "FIELD_START"
+        elif state == "QUOTED":
+            if character == '"':
+                if index + 1 < len(text) and text[index + 1] == '"':
+                    index += 1
+                else:
+                    state = "AFTER_QUOTE"
+        elif character == ",":
+            state = "FIELD_START"
+        index += 1
+    if len(endings) > 1:
+        raise DomainError("INVALID_CSV_LINE_ENDING")
+    return "\r\n" if "\r\n" in endings else "\n"
+
+
 def _read_csv(text: str, line_ending: str) -> list[list[str]]:
+    # csv.reader accepts a quote in the middle of an unquoted field as
+    # literal text. The selected RFC 4180 subset does not.
+    state = "FIELD_START"
+    index = 0
+    while index < len(text):
+        if text.startswith(line_ending, index):
+            if state == "QUOTED":
+                raise DomainError("INVALID_ROW_SHAPE")
+            state = "FIELD_START"
+            index += len(line_ending)
+            continue
+        character = text[index]
+        if state == "FIELD_START":
+            if character == '"':
+                state = "QUOTED"
+            elif character != ",":
+                state = "UNQUOTED"
+        elif state == "UNQUOTED":
+            if character == '"':
+                raise DomainError("INVALID_ROW_SHAPE")
+            if character == ",":
+                state = "FIELD_START"
+        elif state == "QUOTED":
+            if character == '"':
+                if index + 1 < len(text) and text[index + 1] == '"':
+                    index += 1
+                else:
+                    state = "AFTER_QUOTE"
+        elif character == ",":
+            state = "FIELD_START"
+        else:
+            raise DomainError("INVALID_ROW_SHAPE")
+        index += 1
+    if state == "QUOTED":
+        raise DomainError("INVALID_ROW_SHAPE")
+
     try:
         reader = csv.reader(io.StringIO(text, newline=""), strict=True)
         records: list[list[str]] = []
@@ -300,18 +380,11 @@ def parse_dataset(dataset_id: str, source_bytes: bytes) -> DatasetCandidate:
     if "\ufeff" in text:
         raise DomainError("INVALID_CSV_BOM")
 
-    without_crlf = source_bytes.replace(b"\r\n", b"")
-    if b"\r" in without_crlf:
-        raise DomainError("INVALID_CSV_LINE_ENDING")
-    has_crlf = b"\r\n" in source_bytes
-    has_lf = b"\n" in without_crlf
-    if has_crlf and has_lf:
-        raise DomainError("INVALID_CSV_LINE_ENDING")
+    line_ending = _record_line_ending(text)
 
     if not isinstance(dataset_id, str) or _DATASET_ID.fullmatch(dataset_id) is None:
         raise DomainError("INVALID_DATASET_ID")
 
-    line_ending = "\r\n" if has_crlf else "\n"
     if text.split(line_ending, 1)[0] != "month,building,kwh":
         raise DomainError("INVALID_HEADER")
     records = _read_csv(text, line_ending)
@@ -399,11 +472,19 @@ def parse_dataset(dataset_id: str, source_bytes: bytes) -> DatasetCandidate:
         try:
             with localcontext() as context:
                 context.prec = 50
-                percent = (
+                ratio = (
                     (Decimal(row.kwh_milli_text) - Decimal(prior.kwh_milli_text))
                     / Decimal(prior.kwh_milli_text)
                     * Decimal(100)
-                ).quantize(Decimal("0.001"), rounding=ROUND_HALF_EVEN)
+                )
+            # The frozen ratio has 50 significant digits. Rendering three
+            # decimals may need more coefficient digits for a large valid
+            # value; widen only that representation step, not the ratio.
+            with localcontext() as display_context:
+                display_context.prec = max(50, ratio.adjusted() + 5)
+                percent = ratio.quantize(
+                    Decimal("0.001"), rounding=ROUND_HALF_EVEN
+                )
         except DecimalException as error:
             raise CalculationError() from error
         percent_milli_text = _quantized_decimal_to_milli_text(percent)

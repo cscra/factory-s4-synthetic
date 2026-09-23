@@ -90,7 +90,7 @@
 <body>
   <main>
     <header>
-      <p class="eyebrow">Synthetic energy ledger · first slice</p>
+      <p class="eyebrow">Synthetic energy ledger · G5 expansion</p>
       <h1>合成能耗批次台账</h1>
       <p class="lede">导入批准的合成 CSV，核对固定规则下的月度汇总、逐楼比较与不可变历史。所有计算和读取都由本机回环 API 返回。</p>
     </header>
@@ -105,20 +105,20 @@
     <div class="grid">
       <section aria-labelledby="import-title">
         <h2 id="import-title">导入合成批次</h2>
-        <form id="import-form">
+        <form id="import-form" novalidate aria-busy="false">
           <label for="dataset-id">数据集 ID</label>
-          <input id="dataset-id" name="dataset-id" type="text" required maxlength="64" pattern="[a-z0-9][a-z0-9._\-]{0,63}" value="g2-sample-2026-01-02" autocomplete="off" spellcheck="false">
-          <p class="hint">1–64 位小写字母、数字、点、下划线或连字符；提交后不可覆盖。</p>
+          <input id="dataset-id" name="dataset-id" type="text" required maxlength="64" pattern="[a-z0-9][a-z0-9._\-]{0,63}" value="g2-sample-2026-01-02" autocomplete="off" spellcheck="false" aria-describedby="dataset-id-hint">
+          <p id="dataset-id-hint" class="hint">1–64 位小写字母、数字、点、下划线或连字符；提交后不可覆盖。</p>
 
           <label for="csv-file">合成 CSV 文件</label>
-          <input id="csv-file" name="csv-file" type="file" accept=".csv,text/csv" required>
-          <p class="hint">字段必须是 month,building,kwh；本批上限 65,536 字节。</p>
+          <input id="csv-file" name="csv-file" type="file" accept=".csv,text/csv" required aria-describedby="csv-file-hint">
+          <p id="csv-file-hint" class="hint">字段必须是 month,building,kwh；本批上限 65,536 字节。</p>
 
           <div class="actions">
             <button id="submit-import" type="submit">导入并计算</button>
           </div>
         </form>
-        <div id="notice" class="notice" role="status" aria-live="polite">等待选择批准的合成样例。</div>
+        <div id="notice" class="notice" role="status" aria-live="polite" aria-atomic="true">等待选择批准的合成样例。</div>
       </section>
 
       <section aria-labelledby="history-title">
@@ -127,11 +127,11 @@
         <div class="actions">
           <button id="history" class="secondary" type="button">刷新历史</button>
         </div>
-        <ul id="history-list" class="history-list" aria-live="polite"></ul>
+        <ul id="history-list" class="history-list" aria-live="polite" aria-busy="false"></ul>
       </section>
 
       <section id="result" class="result" aria-labelledby="result-title" hidden>
-        <h2 id="result-title">规范计算结果</h2>
+        <h2 id="result-title" tabindex="-1">规范计算结果</h2>
         <div id="summary" class="summary"></div>
         <h3 id="monthly-totals-title">月度总量</h3>
         <dl id="monthly-totals" class="monthly-totals" aria-labelledby="monthly-totals-title"></dl>
@@ -205,11 +205,25 @@
       notice.textContent = message;
     }
 
+    function invalidField(field, message) {
+      field.setAttribute('aria-invalid', 'true');
+      field.setAttribute('aria-describedby', `${field.id}-hint notice`);
+      showNotice(message, 'error');
+      field.focus();
+    }
+
+    function clearFieldError(field) {
+      field.removeAttribute('aria-invalid');
+      field.setAttribute('aria-describedby', `${field.id}-hint`);
+    }
+
+    datasetId.addEventListener('input', () => clearFieldError(datasetId));
+    csvFile.addEventListener('change', () => clearFieldError(csvFile));
+
     function clearResult() {
       result.hidden = true;
       document.getElementById('summary').replaceChildren();
       monthlyTotals.replaceChildren();
-      comparisonTableWrap.scrollLeft = 0;
       document.getElementById('comparison-body').replaceChildren();
       document.getElementById('canonical-json').textContent = '';
     }
@@ -265,7 +279,10 @@
       }
       document.getElementById('canonical-json').textContent = JSON.stringify(dataset, null, 2);
       result.hidden = false;
-      result.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      comparisonTableWrap.scrollLeft = 0;
+      document.getElementById('result-title').focus({ preventScroll: true });
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      result.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
     }
 
     comparisonTableWrap.addEventListener('keydown', (event) => {
@@ -317,6 +334,7 @@
 
     async function loadHistory() {
       historyButton.disabled = true;
+      historyList.setAttribute('aria-busy', 'true');
       historyList.replaceChildren();
       try {
         const response = await fetch('/api/datasets', {
@@ -346,18 +364,24 @@
         historyList.append(failed);
       } finally {
         historyButton.disabled = false;
+        historyList.setAttribute('aria-busy', 'false');
       }
     }
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       clearResult();
+      if (!datasetId.validity.valid) {
+        invalidField(datasetId, '数据集 ID 格式无效；请使用 1–64 位小写字母、数字、点、下划线或连字符。');
+        return;
+      }
       const file = csvFile.files[0];
       if (!file) {
-        showNotice('请选择一个合成 CSV 文件。', 'error');
+        invalidField(csvFile, '请选择一个合成 CSV 文件。');
         return;
       }
       submit.disabled = true;
+      form.setAttribute('aria-busy', 'true');
       showNotice('正在校验、计算并原子写入…');
       try {
         const bytes = await file.arrayBuffer();
@@ -386,6 +410,7 @@
         }
       } finally {
         submit.disabled = false;
+        form.setAttribute('aria-busy', 'false');
       }
     });
 
