@@ -428,6 +428,11 @@
       "sha256": "c33b33fce7333ede6de1a50a79b976100e1bf21b6c8539b273d205b27889aa49"
     },
     {
+      "path": "reviews/G5-online-control.md",
+      "bytes": 2529,
+      "sha256": "fe222abb0143dc413e377e16ff8d0046067fe19cbd08eafe9a8fe92a38e8b41c"
+    },
+    {
       "path": "reviews/G5-product.md",
       "bytes": 2655,
       "sha256": "fd063f58465333473616f29b498cd12bceb0ac3efdbdb3f7353c766826dd444b"
@@ -439,8 +444,8 @@
     },
     {
       "path": "reviews/G5.md",
-      "bytes": 3473,
-      "sha256": "cdab91827ca3138776732042ac95cee1dc345eaeb1b17df3886e96bca774516f"
+      "bytes": 3749,
+      "sha256": "7070ebe665ff2c8aed8dc6efeaf7aa9e13202cfa1b2312a5cfaf99e9a032f5e7"
     },
     {
       "path": "specs/acceptance.md",
@@ -602,5 +607,29 @@
       "bytes": 37456,
       "sha256": "1d7db8747912e69ef360e04a6f766f48182699a919b6c2593ee83dd61f04aa1d"
     }
-  ]
+  ],
+  "online_control": {
+    "first_attempt": {
+      "request_id": "S4-G4-CONSUME-004",
+      "decision": "BLOCK",
+      "reason": "COMPLETION_UNSATISFIED",
+      "record_commit": "b6915b434b45db0165f768ac02016f350ebdce2d",
+      "record_path": "entries/00000077/body.json",
+      "preserved": true
+    },
+    "corrected_attempt": {
+      "request_id": "S4-G4-CONSUME-005",
+      "decision": "ALLOW",
+      "evidence_state": "SATISFIED",
+      "execution_state": "SUCCEEDED_CONFIRMED",
+      "verification_state": "PASS",
+      "input_completeness": "COMPLETE_FOR_DECLARED_SCOPE",
+      "build_identity": "sha256:78b9685596953894e66e60a89d24597314e1735f1a8aa7510b7d96d7a18d8aa8",
+      "record_commit": "41d03ad92a324fd3c665422c424abf5ca601d7b0",
+      "record_path": "entries/00000079/body.json",
+      "record_sha256": "8528ee96beb79bd08fb71667c8d27c6e52590af1d3916a7c9c1bdea89634d331",
+      "recovered_by_inspect_after_client_504": true
+    },
+    "human_g5_decision": "PENDING"
+  }
 }
