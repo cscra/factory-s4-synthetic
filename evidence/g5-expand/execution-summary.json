@@ -1,0 +1,41 @@
+{
+  "schema": "factory-s4-public-expanded-execution-summary/v0.1",
+  "status": "BOUNDED_PASS_FULL_COMPLETION_NOT_CLAIMED",
+  "project_ref": "S4-P-001",
+  "task_ref": "BUILD-EXPAND",
+  "task_revision_ref": "R1",
+  "source_commit": "516c427dd8a4bdb9c322521862373ce165d7e01b",
+  "source_tree": "ba45461dcddaf8dc12d7f87a99dbc5cc783ccd69",
+  "synthetic_only": true,
+  "python_regression": {
+    "passed": 43,
+    "total": 43
+  },
+  "real_chrome_smoke": {
+    "status": "PASS",
+    "viewport_mobile_px": 390,
+    "keyboard_table_scroll_observed": true,
+    "history_reload_resets_scroll": true,
+    "page_javascript_errors": 0
+  },
+  "sqlite": {
+    "integrity_check": "ok",
+    "accepted_dataset_count_in_published_commit_smoke": 1
+  },
+  "independent_technical_review": "PASS_BOUNDED_NO_NEW_P0_P2",
+  "independent_product_review": "PASS_BOUNDED_NO_NEW_VISIBLE_P0_P2",
+  "known_open_items": [
+    "Unbounded G2 kWh lexical rule exceeds bounded G4 HTTP and CSV reader resources",
+    "G2 mutation business codes were not observed on absent G4 routes",
+    "Formal Control runtime does not yet register post-build output refs"
+  ],
+  "not_proved": [
+    "Full G2/G5 completion",
+    "Authentication or per-user identity enforcement",
+    "Full accessibility certification",
+    "G6 Human acceptance",
+    "70 percent threshold change",
+    "Control adoption",
+    "Real business"
+  ]
+}

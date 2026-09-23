@@ -1,0 +1,11 @@
+# G5 BUILD-EXPAND synthetic result candidate
+
+Status: **reviewed bounded candidate; formal completion not claimed**. This page summarizes only public synthetic material. The complete private test originals, browser profile, deployment configuration, and operational logs are not published here.
+
+The authorized later batch is frozen in source commit [`516c427dd8a4bdb9c322521862373ce165d7e01b`](https://github.com/cscra/factory-s4-synthetic/commit/516c427dd8a4bdb9c322521862373ce165d7e01b), tree `ba45461dcddaf8dc12d7f87a99dbc5cc783ccd69`. The six changed files and their exact bytes are listed in [`source-package.json`](../evidence/g5-expand/source-package.json). The bounded [execution summary](../evidence/g5-expand/execution-summary.json) records 43/43 Python tests, a real Chrome loopback check on the published build, one fresh SQLite sample, and independent technical and product reviews. The initial first-slice result and its earlier failed/incomplete observations remain historical records.
+
+Within the approved 65,536-byte G4 HTTP surface, the sample covers the remaining error cases, immutable replay/conflict handling, quoted CSV, exact Decimal and 30% edges, missing month and zero baseline, declarative Analyst/Reviewer reads and denial, keyboard table operation, and history reload. It still has no login or proven user isolation. No sample service was deployed to the public Tunnel; the actual Control service and its records are separate.
+
+Two original-contract questions remain. G2's kWh grammar has no digit ceiling, but G4's HTTP surface and Python CSV parser have finite limits. G2 also names mutation-denial business codes, while absent G4 mutation routes return `405 / METHOD_NOT_ALLOWED` without changing state. Independent reviewers passed the bounded candidate and did **not** claim that these broader G2 semantics were fully implemented. A separate Human product clarification is needed before a full completion claim. In addition, the current Control runtime does not yet register the new output source, so no formal completion fact is claimed from this page.
+
+This proposal does not change the 30% criterion, approve the separate 70% proposal, accept G6, authorize real data, or adopt Factory Control.

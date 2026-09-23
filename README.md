@@ -22,7 +22,7 @@ Not allowed here:
 - private or real business data;
 - production configuration or adoption records.
 
-The repository preserves the G1 through G5 historical review packages and the reviewed first-slice source candidate `0f4547851c267c2094d1716ff0f1e14fc2e40bcc`. This isolated branch extends that sample under the separate `BUILD-EXPAND@R1` authorization; the expansion still requires independent technical and product review. No deployment, real business use, Control adoption, G6 result, or 70 percent threshold change follows from this source branch.
+The repository preserves the G1 through G5 historical review packages and the reviewed first-slice source candidate `0f4547851c267c2094d1716ff0f1e14fc2e40bcc`. Public commit `516c427dd8a4bdb9c322521862373ce165d7e01b` extends that sample under the separate `BUILD-EXPAND@R1` authorization. Independent technical and product reviews passed the bounded synthetic candidate; full G2/G5 completion still needs a product-scope decision and formal output registration. No deployment, real business use, Control adoption, G6 result, or 70 percent threshold change follows from this source.
 
 ## Run the synthetic sample locally
 

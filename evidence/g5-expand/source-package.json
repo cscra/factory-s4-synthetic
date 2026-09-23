@@ -1,0 +1,60 @@
+{
+  "schema": "factory-s4-public-expanded-source-package/v0.1",
+  "status": "REVIEWED_BOUNDED_SYNTHETIC_CANDIDATE",
+  "project_ref": "S4-P-001",
+  "task_ref": "BUILD-EXPAND",
+  "task_revision_ref": "R1",
+  "source_commit": "516c427dd8a4bdb9c322521862373ce165d7e01b",
+  "source_tree": "ba45461dcddaf8dc12d7f87a99dbc5cc783ccd69",
+  "parent_commit": "43d8719ccbcd4e932d67b551346dc17d8520335a",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4820,
+      "sha256": "d9a85c7800585d962717242d7e88c1a6d21a4d7c34349a9649d25adacf96f938",
+      "git_blob_sha": "c20012bb1f2a4e14ef45aaa47d94f9b7ee779563",
+      "change": "modified"
+    },
+    {
+      "path": "app/domain.py",
+      "bytes": 17514,
+      "sha256": "bea26e298723af0c6a8a9669bdf7541fabf608f1ce5f1cba593d962da789b5aa",
+      "git_blob_sha": "7faabd4739509818e13ccb209c1d43c10e69ec0b",
+      "change": "modified"
+    },
+    {
+      "path": "app/static/index.html",
+      "bytes": 19832,
+      "sha256": "855930715c7213c313d0d83f46c7b3cf3a79ed3f91af1184e9872b1dfc0a13e7",
+      "git_blob_sha": "0c78eca54bb19a9d499bf1d7812852a0a78adb8d",
+      "change": "modified"
+    },
+    {
+      "path": "tests/browser_accessibility.cjs",
+      "bytes": 5363,
+      "sha256": "9e7987a9eed1e9a8c214a01c31ab41bc9c87c4da1dee5c4d30f89b3eca1291f2",
+      "git_blob_sha": "6429644f674e9e28f0c9a3d8864c5a91f5f5733c",
+      "change": "added"
+    },
+    {
+      "path": "tests/test_expand.py",
+      "bytes": 17328,
+      "sha256": "9b9b88ce5bfef549195001af8934a8b88650d08af617b629d6a8574c510731dc",
+      "git_blob_sha": "2c05a6256db6bc472e44d4a544968bb28495d437",
+      "change": "added"
+    },
+    {
+      "path": "tests/test_first_slice.py",
+      "bytes": 37391,
+      "sha256": "dbab775c05d80c69b97241807fe969ff6432d535de3ac4bfa038fdbc45f4418a",
+      "git_blob_sha": "fb06e125576e3a837b7bb84b2a1d0fe9fef6aa48",
+      "change": "modified"
+    }
+  ],
+  "remote_original_blob_readback": "PASS_SIX_OF_SIX",
+  "boundaries": [
+    "Public synthetic material only",
+    "No Control source or private evidence",
+    "Not a G6 approval or Control adoption"
+  ]
+}
