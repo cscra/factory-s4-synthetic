@@ -5,13 +5,13 @@
   "task_revision_ref": "R1",
   "gate": "G4",
   "activity": "IMPLEMENT_SLICE",
-  "status": "PROPOSED_NOT_APPROVED",
+  "status": "G4_APPROVED_FIRST_SLICE_COMPLETE_PENDING_G5",
   "classification": "IN_SCOPE",
   "material_change": false,
   "readiness_verified": true,
   "valid_fail": false,
   "technical_plan_authorized_by_prior_gate": true,
-  "first_slice_implementation_authorized": false,
+  "first_slice_implementation_authorized": true,
   "g5_expansion_authorized": false,
   "g6_acceptance_authorized": false,
   "deployment_authorized": false,
@@ -47,5 +47,21 @@
     "owner_page_ref": null,
     "source_commit": null,
     "decision": null
+  },
+  "first_slice_result_accepted": false,
+  "implementation_result": {
+    "source_commit": "0f4547851c267c2094d1716ff0f1e14fc2e40bcc",
+    "source_tree": "e0c8675bb10dd9016377d9491a7252ed9d491a0d",
+    "observation_ref": "OBS-S4-G4-FIRST-SLICE-004",
+    "technical_review": "PASS_ZERO_OPEN_P0_P1_P2_P3",
+    "product_review": "PASS_ZERO_OPEN_P0_P1_P2_P3",
+    "human_g5_decision": "PENDING"
+  },
+  "g4_human_provenance": {
+    "submission": "SUB-S4-G4-001",
+    "human_reference": "批准 SUB-S4-G4-001 @2b7ad3eec9b25a79c2a458de5aebd318366a9ea4",
+    "issue_number": 6,
+    "comment_id": 5784898232,
+    "meaning": "authority to implement the bounded first slice only"
   }
 }

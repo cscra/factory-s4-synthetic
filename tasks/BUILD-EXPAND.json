@@ -1,0 +1,59 @@
+{
+  "schema": "factory-s4-public-task/v0.1",
+  "project_ref": "S4-P-001",
+  "task_ref": "BUILD-EXPAND",
+  "task_revision_ref": "R1",
+  "gate": "G5",
+  "activity": "IMPLEMENT_EXPAND",
+  "status": "PROPOSED_NOT_APPROVED",
+  "classification": "IN_SCOPE",
+  "material_change": false,
+  "readiness_verified": false,
+  "valid_fail": false,
+  "first_slice_result_accepted": false,
+  "later_batch_authorized": false,
+  "g6_acceptance_authorized": false,
+  "deployment_authorized": false,
+  "adoption_authorized": false,
+  "threshold_change_70_authorized": false,
+  "allowed_after_exact_g5_approval": [
+    "REMAINING_ERROR_PRIORITY_CASES",
+    "REPLAY_AND_CONFLICT_VARIANTS",
+    "QUOTED_FIELDS",
+    "EXACT_DECIMAL_AND_30_PERCENT_THRESHOLD_EDGES",
+    "MISSING_MONTH_AND_ZERO_BASELINE",
+    "COMPLETE_ANALYST_REVIEWER_ACTION_MATRIX",
+    "BROWSER_ACCESSIBILITY_REFINEMENTS",
+    "PACKAGING",
+    "FULL_REGRESSION"
+  ],
+  "acceptance_refs": [
+    "reviews/G5.md",
+    "reviews/G5-technical.md",
+    "reviews/G5-product.md",
+    "evidence/g4-first-slice/source-package.json",
+    "evidence/g4-first-slice/execution-summary.json"
+  ],
+  "prior_gate_provenance": {
+    "submission": "SUB-S4-G4-001",
+    "human_reference": "批准 SUB-S4-G4-001 @2b7ad3eec9b25a79c2a458de5aebd318366a9ea4",
+    "source_commit": "2b7ad3eec9b25a79c2a458de5aebd318366a9ea4",
+    "meaning": "authority for the first slice and G5 evidence preparation only"
+  },
+  "result_candidate": {
+    "source_commit": "0f4547851c267c2094d1716ff0f1e14fc2e40bcc",
+    "source_tree": "e0c8675bb10dd9016377d9491a7252ed9d491a0d",
+    "observation_ref": "OBS-S4-G4-FIRST-SLICE-004",
+    "human_g5_decision": "PENDING"
+  },
+  "issue_binding": {
+    "status": "PENDING_OWNER_PAGE",
+    "issue_id": null,
+    "url": null,
+    "decision_repository_id": null,
+    "material_repository_id": null,
+    "owner_page_ref": null,
+    "source_commit": null,
+    "decision": null
+  }
+}

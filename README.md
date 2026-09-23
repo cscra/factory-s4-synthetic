@@ -11,7 +11,7 @@ Allowed here:
 - synthetic product and review material;
 - synthetic sample code and tests after the corresponding Human Gate;
 - generated CSV fixtures approved for the sample;
-- sanitized summaries intended for public review.
+- sanitized summaries and selected synthetic screenshots intended for public review;
 - read-only specification/oracle consistency checkers and their deterministic result JSON.
 
 Not allowed here:
@@ -22,4 +22,4 @@ Not allowed here:
 - private or real business data;
 - production configuration or adoption records.
 
-The repository now preserves the completed G1 through G3 synthetic review packages and the proposed G4 technical implementation plan. The G4 material is a review candidate only: it contains no first-slice backend, persistence, connected browser flow, deployment, real business data, Control adoption, or 70 percent threshold change. Each later Gate still requires its own exact Human decision.
+The repository now preserves the completed G1 through G4 review packages, the Human-authorized first-slice implementation, and the proposed G5 evidence package. The reviewed source candidate is `0f4547851c267c2094d1716ff0f1e14fc2e40bcc`; G5 remains pending an exact Human decision. No later batch, deployment, real business use, Control adoption, G6 result, or 70 percent threshold change is approved by the implementation or its independent reviews.
