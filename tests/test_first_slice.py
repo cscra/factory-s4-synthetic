@@ -2,6 +2,7 @@ import ast
 from contextlib import closing
 import hashlib
 import http.client
+from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
@@ -71,6 +72,37 @@ class SqlFailureConnection:
 
     def __getattr__(self, name):
         return getattr(self.connection, name)
+
+
+class StaticPageParser(HTMLParser):
+    """Extract the static page contracts without assuming a browser engine."""
+
+    def __init__(self):
+        super().__init__()
+        self.dataset_id_patterns = []
+        self.favicon_hrefs = []
+        self.csp_policies = []
+        self.styles = []
+        self._in_style = False
+
+    def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if tag == "input" and attributes.get("id") == "dataset-id":
+            self.dataset_id_patterns.append(attributes.get("pattern"))
+        if tag == "link" and attributes.get("rel") == "icon":
+            self.favicon_hrefs.append(attributes.get("href"))
+        if tag == "meta" and attributes.get("http-equiv") == "Content-Security-Policy":
+            self.csp_policies.append(attributes.get("content", ""))
+        if tag == "style":
+            self._in_style = True
+
+    def handle_endtag(self, tag):
+        if tag == "style":
+            self._in_style = False
+
+    def handle_data(self, data):
+        if self._in_style:
+            self.styles.append(data)
 
 
 class DomainTests(unittest.TestCase):
@@ -561,6 +593,29 @@ class HttpTests(unittest.TestCase):
         ):
             self.assertIn(marker, html)
         self.assertEqual(html.count("台账未改变"), 1)
+
+        page = StaticPageParser()
+        page.feed(html)
+        self.assertEqual(page.dataset_id_patterns, [r"[a-z0-9][a-z0-9._\-]{0,63}"])
+        self.assertEqual(page.favicon_hrefs, ["data:,"])
+        self.assertEqual(len(page.csp_policies), 1)
+        self.assertIn("img-src 'self' data:", page.csp_policies[0])
+
+        css = "\n".join(page.styles)
+        self.assertRegex(
+            css,
+            r"(?s)@media\s*\(max-width:\s*760px\)\s*\{.*?main\s*\{\s*width:\s*min\(calc\(100%\s*-\s*20px\),\s*680px\)",
+        )
+        self.assertRegex(
+            css,
+            r"(?s)@media\s*\(max-width:\s*760px\)\s*\{.*?\.grid\s*\{\s*grid-template-columns:\s*minmax\(0,\s*1fr\);",
+        )
+        self.assertRegex(css, r"\.grid\s*>\s*section\s*\{\s*min-width:\s*0;")
+        self.assertRegex(
+            css,
+            r"\.table-wrap\s*\{\s*min-width:\s*0;\s*overflow-x:\s*auto;",
+        )
+        self.assertRegex(css, r"table\s*\{[^}]*min-width:\s*690px;")
 
     def test_index_distinguishes_confirmed_rejection_from_unknown_outcome(self):
         html = (ROOT / "app" / "static" / "index.html").read_text()
