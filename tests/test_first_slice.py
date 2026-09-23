@@ -83,26 +83,48 @@ class StaticPageParser(HTMLParser):
         self.favicon_hrefs = []
         self.csp_policies = []
         self.styles = []
+        self.elements = {}
+        self.table_headers = []
+        self.scroll_hint_text = []
+        self.scripts = []
         self._in_style = False
+        self._in_scroll_hint = False
+        self._in_script = False
 
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
+        if attributes.get("id"):
+            self.elements[attributes["id"]] = attributes
         if tag == "input" and attributes.get("id") == "dataset-id":
             self.dataset_id_patterns.append(attributes.get("pattern"))
         if tag == "link" and attributes.get("rel") == "icon":
             self.favicon_hrefs.append(attributes.get("href"))
         if tag == "meta" and attributes.get("http-equiv") == "Content-Security-Policy":
             self.csp_policies.append(attributes.get("content", ""))
+        if tag == "th":
+            self.table_headers.append(attributes)
         if tag == "style":
             self._in_style = True
+        if tag == "p" and attributes.get("id") == "comparison-scroll-hint":
+            self._in_scroll_hint = True
+        if tag == "script" and attributes.get("type") != "application/json":
+            self._in_script = True
 
     def handle_endtag(self, tag):
         if tag == "style":
             self._in_style = False
+        if tag == "p" and self._in_scroll_hint:
+            self._in_scroll_hint = False
+        if tag == "script":
+            self._in_script = False
 
     def handle_data(self, data):
         if self._in_style:
             self.styles.append(data)
+        if self._in_scroll_hint:
+            self.scroll_hint_text.append(data)
+        if self._in_script:
+            self.scripts.append(data)
 
 
 class DomainTests(unittest.TestCase):
@@ -616,6 +638,44 @@ class HttpTests(unittest.TestCase):
             r"\.table-wrap\s*\{\s*min-width:\s*0;\s*overflow-x:\s*auto;",
         )
         self.assertRegex(css, r"table\s*\{[^}]*min-width:\s*690px;")
+
+        self.assertIn("monthly-totals", page.elements)
+        self.assertIn("comparison-table-wrap", page.elements)
+        table_region = page.elements["comparison-table-wrap"]
+        self.assertEqual(table_region.get("role"), "region")
+        self.assertEqual(table_region.get("aria-label"), "逐楼月度比较表")
+        self.assertEqual(table_region.get("tabindex"), "0")
+        self.assertEqual(table_region.get("aria-describedby"), "comparison-scroll-hint")
+        self.assertEqual(len(page.table_headers), 7)
+        self.assertTrue(all(header.get("scope") == "col" for header in page.table_headers))
+        self.assertIn("←", "".join(page.scroll_hint_text))
+        self.assertIn("→", "".join(page.scroll_hint_text))
+
+        script = "\n".join(page.scripts)
+        self.assertIn("Object.entries(dataset.monthly_totals_kwh)", script)
+        self.assertIn("monthLabel.textContent = month;", script)
+        self.assertIn("totalValue.textContent = `${total} kWh`;", script)
+        self.assertRegex(
+            script,
+            r"(?s)async function loadDataset\(id\).*?renderDataset\(body\.dataset\);",
+        )
+        self.assertRegex(
+            script,
+            r"(?s)form\.addEventListener\('submit',.*?renderDataset\(body\.dataset\);",
+        )
+        self.assertIn("event.key !== 'ArrowLeft' && event.key !== 'ArrowRight'", script)
+        self.assertIn(
+            "const maxScrollLeft = comparisonTableWrap.scrollWidth - comparisonTableWrap.clientWidth;",
+            script,
+        )
+        self.assertIn("if (maxScrollLeft <= 0) return;", script)
+        self.assertIn("comparisonTableWrap.scrollLeft = boundedScrollLeft;", script)
+        self.assertRegex(
+            script,
+            r"(?s)function clearResult\(\)\s*\{.*?comparisonTableWrap\.scrollLeft\s*=\s*0;",
+        )
+        self.assertNotIn("300.000", script)
+        self.assertNotIn("370.000", script)
 
     def test_index_distinguishes_confirmed_rejection_from_unknown_outcome(self):
         html = (ROOT / "app" / "static" / "index.html").read_text()

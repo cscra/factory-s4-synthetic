@@ -63,6 +63,10 @@
     .summary { display: flex; gap: 18px; flex-wrap: wrap; margin: 0 0 14px; }
     .summary strong { display: block; font: 800 1.2rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
     .summary span { color: var(--muted); font-size: .78rem; }
+    .monthly-totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; margin: 0 0 14px; }
+    .monthly-total { min-width: 0; border: 1px solid var(--line); background: var(--panel); padding: 12px 14px; }
+    .monthly-total dt { color: var(--muted); font-size: .78rem; font-weight: 750; }
+    .monthly-total dd { margin: 4px 0 0; overflow-wrap: anywhere; font: 800 1.45rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
     .table-wrap { min-width: 0; overflow-x: auto; border: 1px solid var(--line); }
     table { border-collapse: collapse; width: 100%; min-width: 690px; }
     th, td { border-bottom: 1px solid var(--line); padding: 9px 11px; text-align: left; white-space: nowrap; }
@@ -129,9 +133,12 @@
       <section id="result" class="result" aria-labelledby="result-title" hidden>
         <h2 id="result-title">规范计算结果</h2>
         <div id="summary" class="summary"></div>
-        <div class="table-wrap">
+        <h3 id="monthly-totals-title">月度总量</h3>
+        <dl id="monthly-totals" class="monthly-totals" aria-labelledby="monthly-totals-title"></dl>
+        <p id="comparison-scroll-hint" class="hint">窄屏可左右滚动查看完整表格；聚焦表格区域后按 ← 或 → 滚动。</p>
+        <div id="comparison-table-wrap" class="table-wrap" role="region" aria-label="逐楼月度比较表" aria-describedby="comparison-scroll-hint" tabindex="0">
           <table>
-            <thead><tr><th>月份 / 楼宇</th><th>本期 kWh</th><th>上期月份</th><th>上期 kWh</th><th>比较状态</th><th>变化率</th><th>异常</th></tr></thead>
+          <thead><tr><th scope="col">月份 / 楼宇</th><th scope="col">本期 kWh</th><th scope="col">上期月份</th><th scope="col">上期 kWh</th><th scope="col">比较状态</th><th scope="col">变化率</th><th scope="col">异常</th></tr></thead>
             <tbody id="comparison-body"></tbody>
           </table>
         </div>
@@ -155,6 +162,8 @@
     const historyList = document.getElementById('history-list');
     const notice = document.getElementById('notice');
     const result = document.getElementById('result');
+    const monthlyTotals = document.getElementById('monthly-totals');
+    const comparisonTableWrap = document.getElementById('comparison-table-wrap');
     const CONFIRMED_REJECTION_CODES = new Set([
       'ROLE_NOT_PERMITTED',
       'INVALID_UTF8',
@@ -199,6 +208,8 @@
     function clearResult() {
       result.hidden = true;
       document.getElementById('summary').replaceChildren();
+      monthlyTotals.replaceChildren();
+      comparisonTableWrap.scrollLeft = 0;
       document.getElementById('comparison-body').replaceChildren();
       document.getElementById('canonical-json').textContent = '';
     }
@@ -220,6 +231,17 @@
       addMetric(summary, String(Object.keys(dataset.monthly_totals_kwh).length), '月份数');
       addMetric(summary, String(dataset.anomalies.length), '异常数');
       addMetric(summary, dataset.criterion_version, '规则版本');
+
+      for (const [month, total] of Object.entries(dataset.monthly_totals_kwh)) {
+        const card = document.createElement('div');
+        card.className = 'monthly-total';
+        const monthLabel = document.createElement('dt');
+        monthLabel.textContent = month;
+        const totalValue = document.createElement('dd');
+        totalValue.textContent = `${total} kWh`;
+        card.append(monthLabel, totalValue);
+        monthlyTotals.append(card);
+      }
 
       const body = document.getElementById('comparison-body');
       for (const [key, comparison] of Object.entries(dataset.building_comparisons)) {
@@ -245,6 +267,21 @@
       result.hidden = false;
       result.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
+
+    comparisonTableWrap.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      const maxScrollLeft = comparisonTableWrap.scrollWidth - comparisonTableWrap.clientWidth;
+      if (maxScrollLeft <= 0) return;
+      const direction = event.key === 'ArrowRight' ? 1 : -1;
+      const scrollAmount = Math.max(48, Math.floor(comparisonTableWrap.clientWidth * 0.8));
+      const boundedScrollLeft = Math.min(
+        maxScrollLeft,
+        Math.max(0, comparisonTableWrap.scrollLeft + direction * scrollAmount)
+      );
+      if (boundedScrollLeft === comparisonTableWrap.scrollLeft) return;
+      event.preventDefault();
+      comparisonTableWrap.scrollLeft = boundedScrollLeft;
+    });
 
     async function decode(response) {
       let body;
