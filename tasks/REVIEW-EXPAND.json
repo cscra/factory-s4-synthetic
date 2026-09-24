@@ -1,0 +1,37 @@
+{
+  "activity": "INDEPENDENT_REVIEW",
+  "classification": "IN_SCOPE",
+  "decision_issue": {
+    "new_task_comment_required": true,
+    "number": 7,
+    "prior_g5_builder_comment_not_authority": true,
+    "repository": "cscra/factory-control-records",
+    "stable_id": 5549638937
+  },
+  "limits": {
+    "control_adoption": false,
+    "control_start": "NOT_RUN",
+    "eighth_install_authorized": false,
+    "g5_completion": false,
+    "g6": false,
+    "real_business": false,
+    "reviewer_result": "UNKNOWN_NOT_RUN"
+  },
+  "material_change": false,
+  "parent_task_ref": "BUILD-EXPAND",
+  "project_ref": "S4-P-001",
+  "review_target": {
+    "g2_clarification_commit": "bc2743ba1585ea401bc3f8089bf50ced29adb1d3",
+    "material_repository": "cscra/factory-s4-synthetic",
+    "product_commit": "516c427dd8a4bdb9c322521862373ce165d7e01b",
+    "product_tree": "ba45461dcddaf8dc12d7f87a99dbc5cc783ccd69",
+    "source_package_commit": "ffdd5fac07804676674820aa39d9e5dd2778a137",
+    "source_relationship": "The package and execution summary at the source-package commit identify the six product blobs at the product commit; the G2 page is a separate bounded acceptance source."
+  },
+  "schema": "factory-s4-public-task/v0.1",
+  "status": "PENDING_EXACT_HUMAN_TASK_AUTHORIZATION",
+  "submission": "SUB-S4-REVIEW-EXPAND-001",
+  "task_ref": "REVIEW-EXPAND",
+  "task_revision_ref": "R1",
+  "valid_fail": false
+}
