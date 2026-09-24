@@ -1,0 +1,9 @@
+{
+  "decision_repository_id": "1378320648",
+  "issue_id": 5549638937,
+  "manifest_path": "submissions/SUB-S4-REVIEW-EXPAND-001/manifest.json",
+  "material_repository_id": "1380306809",
+  "required_gate": "G5",
+  "source_commit": "32e5f4f9a9cc8f61db26cec1c8168d92b41647eb",
+  "submission": "SUB-S4-REVIEW-EXPAND-001"
+}
