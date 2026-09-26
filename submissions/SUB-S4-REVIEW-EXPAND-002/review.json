@@ -1,0 +1,22 @@
+{
+  "data": {
+    "details": {
+      "binding": {
+        "decision_repository_id": "1378320648",
+        "issue_id": 5549638937,
+        "manifest_path": "submissions/SUB-S4-REVIEW-EXPAND-002/manifest.json",
+        "material_repository_id": "1380306809",
+        "required_gate": "G5",
+        "source_commit": "80ae759d63db08696a3cf3116678a70213aec7f6",
+        "submission": "SUB-S4-REVIEW-EXPAND-002"
+      },
+      "review_text": "Synthetic REVIEW-EXPAND@R2 submission SUB-S4-REVIEW-EXPAND-002 is frozen for its approval basis at 80ae759d63db08696a3cf3116678a70213aec7f6. It requests one independent Reviewer execution for the same immutable product 516c427dd8a4bdb9c322521862373ce165d7e01b, using source-package commit ffdd5fac07804676674820aa39d9e5dd2778a137 to identify the six product blobs and separate bounded G2 clarification bc2743ba1585ea401bc3f8089bf50ced29adb1d3. The prior R1 submission and Reviewer result remain historical and are not admitted, reused, or retroactively ratified in this R2 chain. Only an exact Human approval of SUB-S4-REVIEW-EXPAND-002 at the pinned C1 commit, followed by a fresh Control EXECUTION_CHECK ALLOW, may authorize one AUDITED_DISPATCH_V2 Reviewer START. No verdict is predetermined; this does not complete G5, approve G6 or the 70-percent threshold, permit real business data, or adopt Control."
+    },
+    "producer_ref": "WORK",
+    "task_ref": "REVIEW-EXPAND",
+    "task_revision_ref": "R2"
+  },
+  "kind": "SUBMISSION_SNAPSHOT",
+  "mode": "S4_ACCEPTANCE",
+  "schema": "factory-fact/v0.7-s4.2"
+}
