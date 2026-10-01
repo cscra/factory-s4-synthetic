@@ -1,0 +1,102 @@
+{
+  "activity": "INDEPENDENT_REVIEW",
+  "adoption_authorized": false,
+  "allowed_after_exact_g5_approval": [],
+  "classification": "IN_SCOPE",
+  "decision_issue": {
+    "new_task_comment_required": true,
+    "number": 7,
+    "prior_g5_builder_comment_not_authority": true,
+    "repository": "cscra/factory-control-records",
+    "stable_id": 5549638937
+  },
+  "deployment_authorized": false,
+  "g6_acceptance_authorized": false,
+  "gate": "G5",
+  "issue_binding": {
+    "decision": "批准 SUB-S4-REVIEW-EXPAND-002 @80ae759d63db08696a3cf3116678a70213aec7f6",
+    "decision_repository_id": "1378320648",
+    "human_author_id": 31118604,
+    "human_comment_id": 5920709165,
+    "human_comment_url": "https://github.com/cscra/factory-control-records/issues/7#issuecomment-5920709165",
+    "issue_id": 5549638937,
+    "material_repository_id": "1380306809",
+    "owner_page_ref": null,
+    "source_commit": "80ae759d63db08696a3cf3116678a70213aec7f6",
+    "status": "EXACT_HUMAN_APPROVAL_COMMENT_OBSERVED",
+    "url": "https://github.com/cscra/factory-control-records/issues/7"
+  },
+  "l05_new_experiment_authorized": false,
+  "limits": {
+    "control_adoption": false,
+    "control_start": "NOT_RUN",
+    "dispatch_method": "AUDITED_DISPATCH_V2",
+    "g5_completion": false,
+    "g6": false,
+    "l05": false,
+    "real_business": false,
+    "requires_fresh_execution_check_allow": true,
+    "reviewer_result": "PASS"
+  },
+  "material_change": false,
+  "parent_task_ref": "BUILD-EXPAND",
+  "project_ref": "S4-P-001",
+  "readiness_evidence": {
+    "accepted_scope": {
+      "adoption_authorized": false,
+      "g6_authorized": false,
+      "l05_new_experiment_authorized": false,
+      "limitations": [
+        "No fresh independent rebuild of the complete Git tree is claimed.",
+        "No Builder full regression or browser suite was rerun in this acceptance.",
+        "The HTTP server file was outside the six-file product review set.",
+        "The 65,536-byte input limit and 413 over-limit behavior remain unchanged.",
+        "The nonexistent modification interface remains 405 with no state change.",
+        "The two unimplemented G2 business codes remain unimplemented.",
+        "No broader claim is made for login/authentication, arbitrary-length CSV, or general accessibility certification."
+      ],
+      "real_business_authorized": false
+    },
+    "authority_limit": "Readiness metadata records the existing bounded G5 Human decision and formal Reviewer verification for REVIEW-EXPAND/R2. It is not a new Reviewer verdict or completion claim and authorizes no G6, L05, adoption, or real-business action.",
+    "frozen_source_commit": "80ae759d63db08696a3cf3116678a70213aec7f6",
+    "frozen_submission": "SUB-S4-REVIEW-EXPAND-002",
+    "human_author_id": 31118604,
+    "human_comment_body": "批准 SUB-S4-REVIEW-EXPAND-002 @80ae759d63db08696a3cf3116678a70213aec7f6",
+    "human_comment_id": 5920709165,
+    "human_comment_url": "https://github.com/cscra/factory-control-records/issues/7#issuecomment-5920709165",
+    "human_decision_status": "EXACT_HUMAN_APPROVAL_COMMENT_OBSERVED",
+    "reviewer_verification": {
+      "body_sha256": "1ba257a7b43dc444217815d0256dfe17d08133ce9e489adc8b6b9016d364609a",
+      "coverage": [
+        "EXACT_PRODUCT_COMMIT",
+        "G2_BOUNDED_CLARIFICATION",
+        "PACKAGE_TO_PRODUCT_BLOBS",
+        "R01_P1_CLOSURE"
+      ],
+      "final_locator": "entries/00000159/body.json",
+      "publication": "COMMITTED",
+      "request_id": "VER-S4-G5-REVIEW-EXPAND-R2-ATT-008",
+      "result": "PASS",
+      "reviewer_attempt_ref": "ATT-5b964d3bc257487993e0aaaee2160e70",
+      "verification_commit": "22a9367d424711d591d80007975f54ace2b23855"
+    },
+    "schema": "factory-s4-g5-readiness-observation/v1"
+  },
+  "readiness_verified": true,
+  "required_gate": "G5",
+  "reviewer_result_evidence": {
+    "body_sha256": "1ba257a7b43dc444217815d0256dfe17d08133ce9e489adc8b6b9016d364609a",
+    "final_locator": "entries/00000159/body.json",
+    "request_id": "VER-S4-G5-REVIEW-EXPAND-R2-ATT-008",
+    "result": "PASS",
+    "reviewer_attempt_ref": "ATT-5b964d3bc257487993e0aaaee2160e70",
+    "verification_commit": "22a9367d424711d591d80007975f54ace2b23855"
+  },
+  "schema": "factory-s4-public-task/v0.1",
+  "source_commit": "80ae759d63db08696a3cf3116678a70213aec7f6",
+  "status": "G5_EXACT_HUMAN_APPROVAL_OBSERVED",
+  "submission": "SUB-S4-REVIEW-EXPAND-002",
+  "task_ref": "REVIEW-EXPAND",
+  "task_revision_ref": "R2",
+  "valid_fail": false
+}
